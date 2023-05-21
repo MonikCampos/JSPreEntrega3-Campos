@@ -37,13 +37,13 @@ function onChangeCine() {
         console.log("validar=" + validarCine)
         let htmlFormato = document.createElement('div')
         htmlFormato.innerHTML = `
-            <p>Seleccione el <strong>formato</strong></p>
             <select name="selectFormato" id="formato">
                 <option selected="selected" value="">Seleccione Formato...</option>
                 <option value="1">Subtitulada</option>
                 <option value="2">Doblada</option>
                 <option value="3">3D</option>
             </select>
+            <p></p>
         `
         formPelicula.appendChild(htmlFormato)
         validarCine = false
@@ -59,14 +59,13 @@ function onChangeFormato() {
         console.log("validar true")
         let htmlDia = document.createElement('div')
         htmlDia.innerHTML = `
-            <p>Seleccione el <strong>día</strong>
-            </p>
             <select name="selectDia" id="dia">
                 <option selected="selected" value="">Seleccione Día...</option>
                 <option value="1">Hoy</option>
                 <option value="2">Mañana</option>
                 <option value="3">Pasado</option>
             </select>
+            <p></p>
         `
         formPelicula.appendChild(htmlDia)
         validarFormato = false
@@ -81,13 +80,13 @@ function onChangeDia() {
     if (validarDia) {
         let htmlHora = document.createElement('div')
         htmlHora.innerHTML = `
-            <p>Seleccione la <strong>hora</strong></p>
             <select name="selectHora" id="hora">
                 <option selected="selected" value="">Seleccione Hora...</option>
                 <option value="1">14:30</option>
                 <option value="2">16:50</option>
                 <option value="3">22:20</option>
             </select>
+            <p></p>
         `
         formPelicula.appendChild(htmlHora)
         validarDia = false
@@ -114,14 +113,13 @@ function onChangeHora() {
 function sectionPrecio() {
     let htmlPrecio = document.createElement('div')
     htmlPrecio.innerHTML = `
-        <h3>Selección de precio</h3>
-        <p>Seleccione el <strong>precio</strong></p>
         <select name="selectPrecio" id="precio">
-            <option selected="selected" value="">Seleccione Precio...</option>
+            <option selected="selected" value="">Seleccione el Precio...</option>
             <option value="7">NORMAL</option>
             <option value="8">TARDE</option>
             <option value="9">2x1</option>
         </select>
+        <p></p>
         `
     formPrecio.appendChild(htmlPrecio)
     precio = document.getElementById('precio')
@@ -146,14 +144,13 @@ function onChangePrecio() {
 function sectionAsiento() {
     let htmlAsiento = document.createElement('div')
     htmlAsiento.innerHTML = `
-        <h3>Selección de asiento</h3>
-        <p>Seleccione el <strong>asiento</strong></p>
         <select name="selectPrecio" id="asiento">
             <option selected="selected" value="">Seleccione asiento...</option>
             <option value="10">A1</option>
             <option value="11">A2</option>
             <option value="12">A3</option>
         </select>
+        <p></p>
         `
     formAsiento.appendChild(htmlAsiento)
     asiento = document.getElementById('asiento')
@@ -178,14 +175,13 @@ function onChangeAsiento() {
 function sectionResumen() {
     let htmlResumen = document.createElement('div')
     htmlResumen.innerHTML = `
-        <h3>Resumen de transacción</h3>
-        <p>Selección de <strong>tarjeta</strong> de pago.</p>
         <select name="selectTarjeta" id="tarjeta">
-            <option selected="selected" value="">Seleccione Tarjeta...</option>
+            <option selected="selected" value="">Seleccione la Tarjeta...</option>
             <option value="13">VISA DEBITO</option>
             <option value="14">VISA CREDITO</option>
             <option value="15">MASTERCARD</option>
         </select>
+        <p></p>
         `
     formResumen.appendChild(htmlResumen)
     tarjeta = document.getElementById('tarjeta')
@@ -199,6 +195,7 @@ function onChangeTarjeta() {
         let htmlSiguiente = document.createElement('div')
         htmlSiguiente.innerHTML = `
             <a class="btn btn-dark" id="siguienteResumen">SIGUIENTE</a>
+            <p></p>
         `
         formResumen.appendChild(htmlSiguiente)
         validarTarjeta = false
