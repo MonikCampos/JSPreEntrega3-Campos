@@ -2,7 +2,7 @@
 <h2 align="center">Hi, I'm Mónica Campos</h2>
 <h3 align="center">A passionate frontend developer from Córdoba, Argentina</h3>
 
-- I’m currently working on [A movie site] (https://monikcampos.github.io/JSPreEntrega2-Campos/)
+- I’m currently working on [A movie site] (https://monikcampos.github.io/JSPreEntrega3-Campos/)
 
 - I’m currently learning **Full Stack Web Development**
 
