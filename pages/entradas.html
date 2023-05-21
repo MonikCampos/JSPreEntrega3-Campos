@@ -52,59 +52,40 @@
                         <div class="card-header">
                             <h2>Venta de Entradas</h2>
                         </div>
-                        <form>
+                        <form id="formEntradas">
                             <div class="card-body">
-                                <h3>Selección de película</h3>
-                                <p>Seleccione el <strong>cine</strong>, luego el <strong>formato, día y horario</strong>
-                                </p>
-                                <select name="selectCine">
-                                    <option selected="selected" value="">Seleccione Cine...</option>
-                                    <option value="1">CINEMA Haedo</option>
-                                    <option value="2">CINEMA Cordoba</option>
-                                    <option value="3">CINEMA Norcenter</option>
-                                    <option value="4">CINEMA Belgrano</option>
-                                    <option value="5">CINEMA Quilmes</option>
-                                    <option value="6">CINEMA Rosario</option>
-                                </select>
-                                <a class="btn btn-dark">SIGUIENTE</a>
-                                <hr>
-                                <h3>Selección de precio</h3>
-                                <p>Seleccione el <strong>precio</strong></p>
-                                <select name="selectPrecio" onchange="">
-                                    <option selected="selected" value="">Seleccione Precio...</option>
-                                    <option value="7">NORMAL</option>
-                                    <option value="8">TARDE</option>
-                                    <option value="9">2x1</option>
-                                </select>
-                                <a class="btn btn-dark">SIGUIENTE</a>
-                                <hr>
-                                <h3>Selección de asiento</h3>
-                                <p>Seleccione el <strong>asiento</strong></p>
-                                <select name="selectPrecio" onchange="">
-                                    <option selected="selected" value="">Seleccione asiento...</option>
-                                    <option value="10">A1</option>
-                                    <option value="11">A2</option>
-                                    <option value="12">A3</option>
-                                </select>
-                                <a class="btn btn-dark">SIGUIENTE</a>
-                                <hr>
-                                <h3>Resumen de transacción</h3>
-                                <p>Selección de <strong>tarjeta</strong> de pago.</p>
-                                <select name="selectPrecio" onchange="">
-                                    <option selected="selected" value="">Seleccione Tarjeta...</option>
-                                    <option value="13">VISA DEBITO</option>
-                                    <option value="14">VISA CREDITO</option>
-                                    <option value="15">MASTERCARD</option>
-                                </select>
-                                <a class="btn btn-dark">SIGUIENTE</a>
+                                <div id="formPelicula">
+                                    <h3>Selección de película</h3>
+                                    <div>
+                                        <p>Seleccione el <strong>cine</strong></p>
+                                        <select name="selectCine" id="cine">
+                                            <option selected="selected" value="">Seleccione Cine...</option>
+                                            <option value="1">CINEMA Haedo</option>
+                                            <option value="2">CINEMA Cordoba</option>
+                                            <option value="3">CINEMA Norcenter</option>
+                                            <option value="4">CINEMA Belgrano</option>
+                                            <option value="5">CINEMA Quilmes</option>
+                                            <option value="6">CINEMA Rosario</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-footer">
-                                <a class="btn btn-dark">PAGAR</a>
+                            <hr>
+                            <div id="formPrecio">
                             </div>
-                        </form>
+                            <hr>
+                            <div id="formAsiento">
+                            </div>
+                            <hr>
+                            <div id="formResumen">
+                            </div>
                     </div>
+                    <div class="card-footer" id="formPagar">
+                    </div>
+                    </form>
                 </div>
             </div>
+        </div>
         </div>
         <div class="container ticket">
             <div class="row">
@@ -158,7 +139,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
         integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous">
     </script>
-    <script src="./js/peliculas.js"></script>
+    <script src="../js/entradas.js"></script>
 </body>
 
 </html>
