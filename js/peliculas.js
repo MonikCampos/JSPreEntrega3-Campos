@@ -1,11 +1,11 @@
 const moviesList = document.querySelector("#movies-list");
 const movieSinopsis = document.querySelector("#movie-sinopsis");
-const navLink = document.querySelectorAll(".nav-link");
 
 const textoBuscar = document.getElementById("textoBuscar");
 const selectBuscar = document.getElementById("selectBuscar");
 const buscarNav = document.getElementById("buscarNav");
-const labelBuscar = document.getElementById("labelBuscar")
+const labelBuscar1 = document.getElementById("labelBuscar1")
+const labelBuscar2 = document.getElementById("labelBuscar2")
 let byName = false;
 let byGender = false;
 //contenedores div
@@ -35,7 +35,7 @@ class Movie {
   }
 }
 
-const movie1 = new Movie(1, "La sirenita", "Fantasía", 135, "USA", "Rob Marshall", "ATP", "./asset/img/lasirenita.jpg", "LA SIRENITA es la querida historia de Ariel, una sirena joven y apasionada con ansias de aventuras. Ella es la más joven y rebelde de las hijas del rey Tritón, y sueña con descubrir el mundo más allá del mar. Mientras visita la superficie, se enamora del distinguido príncipe Eric, y aunque las sirenas tienen prohibido relacionarse con los humanos, Ariel debe seguir a su corazón. Así es como hace un trato con la malvada bruja del mar, Úrsula, que le da la oportunidad de experimentar la vida sobre la tierra, pero finalmente pone su vida, y la corona de su padre, en peligro.?? La película está protagonizada por la cantante y actriz Halle Bailey (Grown-ish) como Ariel; Jonah Hauer-King (Mis huellas a casa) como el príncipe Eric; el ganador del premio Tony® Daveed Diggs (Hamilton) como la voz de Sebastián; Awkwafina (RAYA Y EL ÚLTIMO DRAGÓN) como la voz de Scuttle; Jacob Tremblay (LUCA) como la voz de Flounder; Noma Dumezweni (EL REGRESO DE MARY POPPINS) como la Reina; Art Malik (HOMELAND) como Sir Grimsby; con el ganador del Oscar® Javier Bardem (Sin lugar para los débiles) como el Rey Tritón; y la dos veces nominada al Oscar® Melissa McCarthy (¿PODRÁS PERDONARME?, Damas en guerra) como Úrsula.?", "https://www.youtube.com/embed/LJgYQixw4gI");
+const movie1 = new Movie(1, "La sirenita", "Fantasía", 135, "USA", "Rob Marshall", "ATP", "./asset/img/lasirenita.jpg", "LA SIRENITA es la querida historia de Ariel, una sirena joven y apasionada con ansias de aventuras. Ella es la más joven y rebelde de las hijas del rey Tritón, y sueña con descubrir el mundo más allá del mar. Mientras visita la superficie, se enamora del distinguido príncipe Eric, y aunque las sirenas tienen prohibido relacionarse con los humanos, Ariel debe seguir a su corazón. Así es como hace un trato con la malvada bruja del mar, Úrsula, que le da la oportunidad de experimentar la vida sobre la tierra, pero finalmente pone su vida, y la corona de su padre, en peligro? La película está protagonizada por la cantante y actriz Halle Bailey como Ariel; Jonah Hauer-King como el príncipe Eric; Noma Dumezweni como la Reina; Art Malik como Sir Grimsby; con el ganador del Oscar Javier Bardem como el Rey Tritón; y la dos veces nominada al Oscar Melissa McCarthy como Úrsula.", "https://www.youtube.com/embed/LJgYQixw4gI");
 const movie2 = new Movie(2, "Cuando ellas quieren más", "Comedia", 108, "USA", "Bill Holderman", "ATP", "./asset/img/cuandoellasquierenmas.jpg", "La esperada secuela sigue a nuestras cuatro mejores amigas mientras llevan su club de lectura a Italia para hacer el divertido viaje de chicas que nunca tuvieron. Cuando las cosas se salen de control y se revelan secretos, sus relajantes vacaciones se convierten en una aventura única en la vida.", "https://www.youtube.com/embed/7l8f6IjX5ag");
 const movie3 = new Movie(3, "Amor a primer mensaje", "Comedia romántica", 104, "USA", "Jim Strouse", "ATP", "./asset/img/amoraprimermensaje.jpg", "¿Qué pasaría si un mensaje de texto al azar te condujera al amor de tu vida? En esta comedia romántica, ante la pérdida de su prometido, Mira Ray envía una serie de mensajes de texto románticos a su antiguo número de teléfono... sin darse cuenta de que el número había sido reasignado al nuevo teléfono del trabajo de Rob Burns. Rob, periodista, queda cautivado por la honestidad de los textos. Cuando le asignan la tarea de escribir un perfil de la megaestrella Celine Dion (interpretándose a sí misma en su primer papel cinematográfico), le pide ayuda para averiguar cómo conocer a Mira en persona... y conquistar su corazón.", "https://www.youtube.com/embed/XC6ZnoGg3Rg");
 const movie4 = new Movie(4, "Cría Siniestra", "Terror", 91, "Finlandia", "Hanna Bergholm", "SAM16", "./asset/img/criasiniestra.jpg", "Una noche, Tinja encontrará un extraño huevo. En lugar de deshacerse de él, lo esconde y mantiene caliente, porque percibe vida dentro de él. Pero ni ella misma podría haber imaginado nunca lo que saldría del cascarón…", "https://www.youtube.com/embed/ox9jhbW8W7c");
@@ -46,7 +46,7 @@ const movie8 = new Movie(8, "La sudestada", "Drama", 86, "Argentina", "Daniel Ca
 const movie9 = new Movie(9, "Guardianes de la Galaxia Vol. 3", "Acción", 149, "USA", "James Gunnl", "SAM13", "./asset/img/guardianes.jpg", "En GUARDIANES DE LA GALAXIA VOL. 3 de Marvel Studios, la querida banda de Guardianes se instala en Knowhere. Pero sus vidas no tardan en verse alteradas por los ecos del turbulento pasado de Rocket. Peter Quill, aún conmocionado por la pérdida de Gamora, debe reunir a su equipo en una peligrosa misión para salvar la vida de Rocket, una misión que, si no se completa con éxito, podría muy posiblemente conducir al final de los Guardianes tal y como los conocemos.", "https://www.youtube.com/embed/qAkCoX760xQ");
 const movie10 = new Movie(10, "Misántropo", "Drama, Suspenso", 119, "USA", "Damián Szifron", "SAM16", "./asset/img/misantropo.jpg", "El creador de la mítica serie Los Simuladores y director de la película Relatos salvajes, nominada al Premio Oscar®, ganadora del Premio Bafta® y hasta la fecha, el film nacional más exitoso de la historia, es también autor del guion junto al británico Jonathan Wakeham. Shailene Woodley (Big Little Lies, The Fault in Our Stars, The Divergent Series) protagoniza este implacable thriller junto a Ben Mendelsohn (Rogue One: una historia de Star Wars, Ready Player One, Robin Hood). Baltimore, la noche de año nuevo. Un feroz ataque producido por un único hombre deja un saldo de 29 muertos y ni una sola pista. Eleanor Falco (Shailene Woodley), una retraída pero talentosa mujer policía de bajo rango, es reclutada por el Agente Especial del FBI Geoffrey Lammark (Ben Mendelsohn) para integrar el equipo a cargo de la identificación y captura del asesino en masa.", "https://www.youtube.com/embed/sGjJhdTqfZc");
 const movie11 = new Movie(11, "Vera", "Drama", 115, "Austria", "Tizza Covi", "SAM13", "./asset/img/vera.jpg", "Vera vive a la sombra de su famoso padre. Cansada de su vida y de sus relaciones superficiales, se adentra en la alta sociedad romana. Cuando en los suburbios hiere a un niño de ocho años en un accidente auto movilístico, ella forma una relación intensa con él y con su padre. Pero pronto descubre que también en ese mundo ella es sólo un instrumento para los demás.", "https://www.youtube.com/embed/S0l4khGYFXc");
-const movie12 = new Movie(12, "Rápidos y Furiosos X", "Aventuras, Acción", 141, "USA", "Louis Leterrier", "SAM16", "./asset/img/rapidosyfuriosos.jpg", "Empieza el final del camino. Rápidos y Furiosos X, la décima entrega de la saga Rápidos y Furiosos, presenta los capítulos finales de una de las franquicias mundiales más famosas e históricas del cine, que ahora en su tercera década se mantiene fuerte y con el mismo elenco y los personajes que cuando empezó. A lo largo de muchas misiones y contra imposibles adversidades, Dom Toretto (VIN DIESEL) y su familia han sido más astutos, más motivados y más rápidos y determinados que todos los enemigos que se han cruzado en su camino. Ahora confrontan al oponente más letal al que jamás se han enfrentado: una aterradora amenaza que emerge de las sombras del pasado alimentada por la venganza de sangre, y que está decidida a destrozar esta familia y destruir todo aquello —y a todos— a los que Dom ama, para siempre. En la cinta Rápidos y Furiosos 5in Control de 2011, Dom y su equipo acabaron con el infame capo de la droga brasileño Hernan Reyes y diezmaron su imperio en un puente de Río de Janeiro. Lo que no sabían era que el hijo de Reyes, Dante (JASON MOMOA, protagonista de Aquaman), fue testigo de todo y ha pasado los últimos 12 años ideando un plan maestro para hacer que Dom pague el precio más alto. El plan de Dante esparcirá a la familia de Dom desde Los Ángeles hasta las catacumbas de Roma; desde Brasil, hasta Londres; y desde Portugal hasta la Antártida. Se forjarán nuevos aliados y resurgirán viejos enemigos. Pero todo cambia cuando Dom descubre que su hijo de 8 años (LEO ABELO PERRY, actor de la serie Black-ish) es el objetivo final de la venganza de Dante.", "https://www.youtube.com/embed/htrcVc_5lQU");
+const movie12 = new Movie(12, "Rápidos y Furiosos X", "Aventuras, Acción", 141, "USA", "Louis Leterrier", "SAM16", "./asset/img/rapidosyfuriosos.jpg", "Empieza el final del camino. Rápidos y Furiosos X, la décima entrega de la saga Rápidos y Furiosos, presenta los capítulos finales de una de las franquicias mundiales más famosas e históricas del cine, que ahora en su tercera década se mantiene fuerte y con el mismo elenco y los personajes que cuando empezó. A lo largo de muchas misiones y contra imposibles adversidades, Dom Toretto (VIN DIESEL) y su familia han sido más astutos, más motivados y más rápidos y determinados que todos los enemigos que se han cruzado en su camino. Ahora confrontan al oponente más letal al que jamás se han enfrentado: una aterradora amenaza que emerge de las sombras del pasado alimentada por la venganza de sangre, y que está decidida a destrozar esta familia y destruir a los que Dom ama, para siempre. En la cinta Rápidos y Furiosos 5in Control de 2011, Dom y su equipo acabaron con el infame capo de la droga brasileño Hernan Reyes y diezmaron su imperio en un puente de Río de Janeiro. Lo que no sabían era que el hijo de Reyes, Dante (JASON MOMOA), fue testigo de todo y ha pasado los últimos 12 años ideando un plan maestro para hacer que Dom pague el precio más alto. El plan de Dante esparcirá a la familia de Dom desde Los Ángeles hasta las catacumbas de Roma; desde Brasil, hasta Londres; y desde Portugal hasta la Antártida. Se forjarán nuevos aliados y resurgirán viejos enemigos. Pero todo cambia cuando Dom descubre que su hijo de 8 años (LEO ABELO PERRY) es el objetivo final de la venganza de Dante.", "https://www.youtube.com/embed/htrcVc_5lQU");
 const movie13 = new Movie(13, "Sombras de un crimen", "Drama, Suspenso", 110, "Irlanda", "Neil Jordan", "SAM13", "./asset/img/sombrasdeuncrimen.jpg", "Liam Neeson da vida a Philip Marlowe, un detective privado que está envuelto en malos negocios y una vida solitaria. Su suerte cambiará con la llegada de Clare Cavendish (Diane Kruger), una hermosa mujer que le contratará para encontrar a su ex amante. Este acontecimiento resultará ser sólo una pequeña parte de un gran misterio por resolver.", "https://www.youtube.com/embed/vm24XO9TCMg");
 const movie14 = new Movie(14, "Empieza el baile", "Drama, Comedia", 99, "Argentina", "Marina Seresesky", "SAM13", "./asset/img/empiezaelbaile.jpg", "Carlos y Margarita fueron la pareja de tango más famosa y reconocida de su época. Hoy, poco y nada queda de ese esplendor, de esa pasión que los llevó a compartir, escenarios, viajes y vida... Carlos vive en Madrid, disfrutando de la segunda oportunidad que le ha dado la vida y Margarita vive en Buenos Aires inmersa en la pobreza y el olvido, pero con ese humor socarrón y canalla que siempre la ha caracterizado. Junto a su inseparable amigo Pichuquito, la pareja inicia un viaje en busca de respuestas, que los enfrentará a sus recuerdos, a sus miedos, pero sobre todo a sus verdaderos deseos. En este disparatado viaje se reencontrarán con el pasado que tanto han evadido, pero también con la vida en estado puro.", "https://www.youtube.com/embed/Td6pDaF5hdQ");
 const movie15 = new Movie(15, "Los Caballeros del Zodiaco Saint Seiya - El Inicio", "Acción", 113, "USA", "Tomek Baginski", "SAM13", "./asset/img/loscaballeros.jpg", "Basada en la sensación internacional del anime, Caballeros del Zodiaco por primera vez lleva a la pantalla grande la saga de Saint Seiya en acción real. Seiya (Mackenyu), un testarudo adolescente callejero, pasa el tiempo luchando por dinero mientras busca a su hermana secuestrada. Cuando en una de sus peleas se le revelan poderes místicos que desconocía, Seiya se ve inmerso en un mundo de santos en guerra, antiguos entrenamientos mágicos y una diosa reencarnada que necesita su protección. Si quiere sobrevivir, tendrá que aceptar su destino y sacrificarlo todo para ocupar el lugar que le corresponde entre los Caballeros del Zodiaco.", "https://www.youtube.com/embed/T-iN3U-RNlM");
@@ -72,6 +72,7 @@ function renderMovies(movies, view) {
           <div class="media-body">
           <h4>${movie.gender} - ${movie.qualification}</h4>
           <h2><strong>${movie.title}</strong></h2>
+          <p>${movie.description}</p>
           <a onclick="showMovie(${movie.id});" href="#sinopsisBanner"><h3>Sinopsis <i class="fa-sharp fa-solid fa-circle-play"></i></h3></a>
           </div>
       </div>
@@ -98,121 +99,18 @@ function renderMovies(movies, view) {
     });
   }
 }
+renderMoviesLista.addEventListener('click', () => {
+  renderMovies(movies,0);
+});
 renderMoviesCuadricula.addEventListener('click', () => {
   renderMovies(movies,1);
 });
 
-renderMoviesLista.addEventListener('click', () => {
-  renderMovies(movies,0);
-});
-
-//Funciones de filtros de películas
-// function MoviesFilterAccion() {
-//   let genero = "ACCIÓN";
-//   resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
-//   let msg = "Género: " + genero + "\n";
-//   resultado.forEach((movie) => {
-//     msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-//   });
-//   alert(msg);
-// }
-
-// function MoviesFilterComedy() {
-//   let genero = "COMEDIA";
-//   resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
-//   let msg = "Género: " + genero + "\n";
-//   resultado.forEach((movie) => {
-//     msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-//   });
-//   alert(msg);
-// }
-
-// function MoviesFilterDrama() {
-//   let genero = "DRAMA";
-//   resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
-//   let msg = "Género: " + genero + "\n";
-//   resultado.forEach((movie) => {
-//     msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-//   });
-//   alert(msg);
-// }
-
-// function MoviesFilterHorror() {
-//   let genero = "TERROR";
-//   resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
-//   let msg = "Género: " + genero + "\n";
-//   resultado.forEach((movie) => {
-//     msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-//   });
-//   alert(msg);
-// }
-
-// function MoviesFilterThriller() {
-//   let genero = "SUSPENSO";
-//   resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
-//   let msg = "Género: " + genero + "\n";
-//   resultado.forEach((movie) => {
-//     msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-//   });
-//   alert(msg);
-// }
-
-// function MoviesFilterFantacy() {
-//   let genero = "FANTASÍA";
-//   resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
-//   let msg = "Género: " + genero + "\n";
-//   resultado.forEach((movie) => {
-//     msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-//   });
-//   alert(msg);
-// }
-
-// function MoviesFilterAventure() {
-//   let genero = "AVENTURA";
-//   resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
-//   let msg = "Género: " + genero + "\n";
-//   resultado.forEach((movie) => {
-//     msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-//   });
-//   alert(msg);
-// }
-
-// filterAccion.addEventListener('click', () => {
-//   MoviesFilterAccion();
-// });
-// filterComedia.addEventListener('click', () => {
-//   MoviesFilterComedy();
-// });
-// filterDrama.addEventListener('click', () => {
-//   MoviesFilterDrama();
-// });
-// filterTerror.addEventListener('click', () => {
-//   MoviesFilterHorror();
-// });
-// filterSuspenso.addEventListener('click', () => {
-//   MoviesFilterThriller();
-// });
-// filterFantasia.addEventListener('click', () => {
-//   MoviesFilterFantacy();
-// });
-// filterAventura.addEventListener('click', () => {
-//   MoviesFilterAventure();
-// });
-// filterTodas.addEventListener('click', () => {
-//   MoviesFilterAccion();
-//   MoviesFilterComedy();
-//   MoviesFilterDrama();
-//   MoviesFilterHorror();
-//   MoviesFilterThriller();
-//   MoviesFilterFantacy();
-//   MoviesFilterAventure();
-// });
-
 //Funciones de búsquedas de películas
 function searchMoviesName() {
   if (textoBuscar.value === "") {
-    labelBuscar.innerHTML=" << Ingrese un texto para buscar"
-    labelBuscar.classList.remove("disableElement");
+    labelBuscar1.innerHTML=" << Ingrese un texto para buscar"
+    labelBuscar1.classList.remove("disableElement");
     textoBuscar.focus();
   } else {
     let txt = textoBuscar.value.toUpperCase();
@@ -228,31 +126,46 @@ function searchMoviesName() {
       });
       renderMovies(foundMovies, 1);
       showMovie(id); 
-      // resetSearch();
-      labelBuscar.innerHTML=" << Se muestran las películas con el filtro ingresado";
-      labelBuscar.classList.remove("disableElement");
+      labelBuscar1.innerHTML=" << Se muestran las películas con el filtro ingresado";
+      labelBuscar1.classList.remove("disableElement");
+      textoBuscar.focus();
     } else {
-      labelBuscar.innerHTML=" << No se encontro ninguna película que coincida con el texto ingresado";
-      labelBuscar.classList.remove("disableElement");
+      labelBuscar1.innerHTML=" << No se encontro ninguna película que coincida con el texto ingresado";
+      labelBuscar1.classList.remove("disableElement");
       textoBuscar.focus();
     }
   }
 }
 
-// function searchMoviesGender() {
-//   //busqueda por genero
-//   let peliculaABuscar = prompt("Ingrese el nombre del género cinematográfico que quiere encontrar: ").toUpperCase();
-//   let resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(peliculaABuscar));
-//   if (resultado.length != 0) {
-//     let msg = "Géneros que coinciden con la búsqueda: " + peliculaABuscar + "\n";
-//     resultado.forEach((movie) => {
-//       msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-//     });
-//     alert(msg);
-//   } else {
-//     alert("No se encontró ningún género que coincida." + peliculaABuscar);
-//   }
-// }
+function searchMoviesGender() {
+  if (selectBuscar.value === "0") {
+    labelBuscar2.innerHTML=" << Seleccione un género para buscar"
+    labelBuscar2.classList.remove("disableElement");
+    selectBuscar.focus();
+  } else {
+    alert("selectBuscar.value:" + selectBuscar.value);
+    let txt = selectBuscar.value.toUpperCase();
+    let resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(txt));
+    if (resultado.length != 0) {
+      let id = 0;
+      resultado.forEach((movie) => {
+        foundMovies.push(movie)
+        if (id===0) { //para mostrar en sinopsis la primera pelicula de la busqueda
+          id=movie.id;
+        }
+      });
+      renderMovies(foundMovies, 1);
+      showMovie(id); 
+      labelBuscar2.innerHTML=" << Se muestran las películas con el filtro ingresado";
+      labelBuscar2.classList.remove("disableElement");
+    } else {
+      labelBuscar2.innerHTML=" << No se encontro ninguna película que coincida con el texto ingresado";
+      labelBuscar2.classList.remove("disableElement");
+      renderMovies(movies, 1);
+      showMovie(1);
+    }
+  }
+}
 
 //Habilita seccion búsqueda y deshabilita buscar en menú
 buscarNav.addEventListener('click', () => {
@@ -271,7 +184,6 @@ btnByName.addEventListener('click', () => {
   searchByName.classList.remove("disableElement");
   searchBtns.classList.remove("disableElement")
   textoBuscar.classList.remove("disableElement");
-  // labelBuscar.innerHTML="";
   textoBuscar.focus();
 });
 btnByGender.addEventListener('click', () => {
@@ -282,22 +194,18 @@ btnByGender.addEventListener('click', () => {
   searchByGender.classList.remove("disableElement");
   searchBtns.classList.remove("disableElement")
 });
-
 btnSearch.addEventListener('click', () => {
   //Búsqueda por nombre o por genero
   if (byName) {
     searchMoviesName();
   } else {
-    if (byGender) {
-      // searchMoviesGender();
-    } else {
-      alert("Seleccione una opción de búsqueda.");
-    }
+    searchMoviesGender();
   }
 });
 btnCancel.addEventListener('click', () => {
   resetSearch();
   renderMovies(movies, 1);
+  showMovie(1);
 });
 
 //Cambio en el texto a buscar
@@ -313,11 +221,14 @@ function resetSearch(){
   searchByGender.classList.add("disableElement");
   searchBtns.classList.add("disableElement");
   //Resetea variables de busqueda
+  foundMovies.length = 0;
   byName = false;
   byGender = false;
   // Borra contenido de buscar, del label . 
   textoBuscar.value="";
-  labelBuscar.innerHTML="";
+  selectBuscar.value ="0";
+  labelBuscar1.innerHTML="";
+  labelBuscar2.innerHTML="";
 }
 
 //función que muestra la sinopsis de cada película
@@ -355,15 +266,6 @@ function showMovie(id) {
     movieSinopsis.appendChild(contenedorMovie);
   }
 }
-// agregar el iframe arriba <iframe src="${foundMovie.video}" title="${foundMovie.title}" frameborder="0" allow="autoplay" allowfullscreen></iframe>
-
-
-
-// showSinopsis.addEventListener('click', () => {
-  //como le paso el id del elemento a mostrar?
-
-//   showMovie();
-// });
 
 //popover de login
 $(document).ready(function () {
