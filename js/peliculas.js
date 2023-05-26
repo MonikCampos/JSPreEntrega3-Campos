@@ -19,6 +19,7 @@ const btnByName = document.getElementById("btnByName");
 const btnByGender = document.getElementById("btnByGender");
 const btnSearch = document.getElementById("btnSearch");
 const btnCancel = document.getElementById("btnCancel");
+const btnSynopsis = document.querySelectorAll(".btnSynopsis");
 
 class Movie {
   constructor(id, titulo, genero, minutos, origen, director, calificacion, imagen, descripcion, video) {
@@ -60,10 +61,15 @@ const movies = [movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, 
 const foundMovies = [];
 
 //Función de las vistas de películas
-function renderMovies(movies, view) {
+function renderMovies(movies) {
   moviesList.innerHTML = '';
-  if (view === 0) { //0-LISTA
+  let syn=0;
+  if (localStorage.getItem('view') === "lista") { 
     movies.forEach(movie => {
+      if (syn===0) {
+        synopsis=movie.id
+        syn++
+      }; 
       let contenedorMovie = document.createElement('div');
       contenedorMovie.classList.add('col-12');
       contenedorMovie.innerHTML = `
@@ -72,16 +78,20 @@ function renderMovies(movies, view) {
           <div class="media-body">
           <h4>${movie.gender} - ${movie.qualification}</h4>
           <h2><strong>${movie.title}</strong></h2>
-          <p>${movie.description}</p>
-          <a onclick="showMovie(${movie.id});" href="#sinopsisBanner"><h3>Sinopsis <i class="fa-sharp fa-solid fa-circle-play"></i></h3></a>
+          <p>${cortarDescripcion(movie.description,60)}</p>
+          <a class="btnSynopsis" id=${movie.id} href="#sinopsisBanner"><h3>Sinopsis <i class="fa-sharp fa-solid fa-circle-play"></i></h3></a>
           </div>
       </div>
       `;
       contenedorMovie.innerHTML = contenedorMovie.innerHTML + `</table><hr>`;
       moviesList.appendChild(contenedorMovie);
     });
-  } else { //1-CUADRICULA
+  } else { //CUADRICULA
     movies.forEach(movie => {
+      if (syn===0) {
+        synopsis=movie.id
+        syn++;
+      };
       let contenedorMovie = document.createElement('div');
       contenedorMovie.classList.add('col-sm-12');
       contenedorMovie.classList.add('col-md-6');
@@ -92,7 +102,7 @@ function renderMovies(movies, view) {
         <div class="card-body">
           <h4>${movie.gender} - ${movie.qualification}</h4>
           <h2><strong>${movie.title}</strong></h2>
-          <a onclick="showMovie(${movie.id});" href="#sinopsisBanner"><h3>Sinopsis <i class="fa-sharp fa-solid fa-circle-play"></i></h3></a>
+          <a class="btnSynopsis" id=${movie.id} href="#sinopsisBanner"><h3>Sinopsis <i class="fa-sharp fa-solid fa-circle-play"></i></h3></a>
         </div>
     `;
       moviesList.appendChild(contenedorMovie);
@@ -100,11 +110,25 @@ function renderMovies(movies, view) {
   }
 }
 renderMoviesLista.addEventListener('click', () => {
-  renderMovies(movies,0);
+  //almaceno en el localstorage el modo de visualización de la cartelera
+  localStorage.setItem('view', "lista");
+  renderMovies(movies);
 });
 renderMoviesCuadricula.addEventListener('click', () => {
-  renderMovies(movies,1);
+  //almaceno en el localstorage el modo de visualización de la cartelera
+  localStorage.setItem('view', "cuadricula");
+  renderMovies(movies);
 });
+
+//función que me cortá la descripción de las películas para visualizarlas en la vista listado
+function cortarDescripcion(texto, palabrasMaximas) {
+  const palabras = texto.split(/\s+/);
+  if (palabras.length > palabrasMaximas) {
+    const palabrasRestantes = palabras.splice(palabrasMaximas);
+    return palabras.join(' ') + '...';
+  }
+  return texto;
+}
 
 //Funciones de búsquedas de películas
 function searchMoviesName() {
@@ -124,8 +148,9 @@ function searchMoviesName() {
           id=movie.id;
         }
       });
-      renderMovies(foundMovies, 1);
-      showMovie(id); 
+      renderMovies(foundMovies);
+      synopsis=id;
+      showMovie(synopsis); 
       labelBuscar1.innerHTML=" << Se muestran las películas con el filtro ingresado";
       labelBuscar1.classList.remove("disableElement");
       textoBuscar.focus();
@@ -154,15 +179,17 @@ function searchMoviesGender() {
           id=movie.id;
         }
       });
-      renderMovies(foundMovies, 1);
-      showMovie(id); 
+      renderMovies(foundMovies);
+      synopsis=id;
+      showMovie(synopsis); 
       labelBuscar2.innerHTML=" << Se muestran las películas con el filtro ingresado";
       labelBuscar2.classList.remove("disableElement");
     } else {
       labelBuscar2.innerHTML=" << No se encontro ninguna película que coincida con el texto ingresado";
       labelBuscar2.classList.remove("disableElement");
-      renderMovies(movies, 1);
-      showMovie(1);
+      renderMovies(movies);
+      synopsis=1;
+      showMovie(synopsis);
     }
   }
 }
@@ -204,9 +231,25 @@ btnSearch.addEventListener('click', () => {
 });
 btnCancel.addEventListener('click', () => {
   resetSearch();
-  renderMovies(movies, 1);
-  showMovie(1);
+  renderMovies(movies);
+  synopsis=1;
+  showMovie(synopsis);
 });
+
+//Click en btn de sinopsis
+// btnSynopsis.forEach(btn => {
+//   btn.addEventListener('click', () => {
+//   synopsis=btn.id;
+//   showMovie();
+//   });
+// }) no funciona el click...ver
+for (const btn of btnSynopsis) {
+  btn.addEventListener('click', () => {
+    alert("btn.id: " + btn.id);
+    synopsis=btn.id;
+    showMovie(synopsis);
+  });
+}
 
 //Cambio en el texto a buscar
 textoBuscar.addEventListener('keydown', function () {
@@ -273,5 +316,11 @@ $(document).ready(function () {
 });
 
 //llamadas a funciones iniciales
-renderMovies(movies, 1);
-showMovie(1);
+
+//vista y sinopsis por defecto
+localStorage.setItem('view', "cuadricula");
+let synopsis = 1;
+//vista cuadricula de la cartelera
+renderMovies(movies);
+//carga primera sinopsis
+showMovie(synopsis);

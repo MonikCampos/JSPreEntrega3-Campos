@@ -1,18 +1,18 @@
 //Lógica para la vta de entradas
 const formEntradas = document.getElementById('formEntradas')
 const formPelicula = document.getElementById('formPelicula')
-const cine = document.getElementById('cine')
-cine.addEventListener("change", onChangeCine)
+const selectCine = document.getElementById('selectCine')
+selectCine.addEventListener("change", onChangeCine)
 
-let formato = null
-let dia = null
-let hora = null
+let selectFormato = null
+let selectDia = null
+let selectHora = null
 let siguienteCine = null
-let precio = null
+let selectPrecio = null
 let siguientePrecio = null
-let asiento = null
+let selectAsiento = null
 let siguienteAsiento = null
-let tarjeta = null
+let selectTarjeta = null
 let siguienteResumen = null
 
 let validarCine = true
@@ -31,57 +31,59 @@ formEntradas.addEventListener('submit', function (event) {
     }
 });
 
+//podría cargar para cada película las opciones de horas y formatos, en array dentro del objeto por ejemplo
+//proxima entrega si llego
 function onChangeCine() {
-    const selectedOption = cine.options[cine.selectedIndex].value
+    const selectedOption = selectCine.options[selectCine.selectedIndex].value
     // console.log(`opcion: ${selectedOption}`)
     if (validarCine) {
-        console.log("validar=" + validarCine)
         let htmlFormato = document.createElement('div')
         htmlFormato.innerHTML = `
-            <select name="selectFormato" id="formato">
-                <option selected="selected" value="">Seleccione Formato...</option>
-                <option value="1">Subtitulada</option>
-                <option value="2">Doblada</option>
-                <option value="3">3D</option>
+            <select name="selectFormato" id="selectFormato">
+                <option selected value="0">Seleccione Formato...</option>
+                <option value="2D-Subtitulada">2D-Subtitulada</option>
+                <option value="2D-Doblada">2D-Doblada</option>
+                <option value="3D-Doblada">3D-Doblada</option>
             </select>
             <p></p>
         `
         formPelicula.appendChild(htmlFormato)
         validarCine = false
-        formato = document.getElementById('formato')
-        formato.addEventListener("change", onChangeFormato)
+        selectFormato = document.getElementById('selectFormato')
+        selectFormato.addEventListener("change", onChangeFormato)
     }
 }
 
 function onChangeFormato() {
-    const selectedOption = formato.options[formato.selectedIndex].value
+    const selectedOption = selectFormato.options[selectFormato.selectedIndex].value
     // console.log(`opcion: ${selectedOption}`)
     if (validarFormato) {
-        console.log("validar true")
         let htmlDia = document.createElement('div')
         htmlDia.innerHTML = `
-            <select name="selectDia" id="dia">
-                <option selected="selected" value="">Seleccione Día...</option>
-                <option value="1">Hoy</option>
-                <option value="2">Mañana</option>
-                <option value="3">Pasado</option>
+            <select name="selectDia" id="selectDia">
+                <option selected="selected" value="">Seleccione Día...</option>                
             </select>
             <p></p>
         `
         formPelicula.appendChild(htmlDia)
         validarFormato = false
-        dia = document.getElementById('dia')
-        dia.addEventListener("change", onChangeDia)
+        selectDia = document.getElementById('selectDia')
+        const diasAvanzados = 7;
+        const opcionesSelect = cargarDias(diasAvanzados);
+        selectDia.innerHTML = opcionesSelect.join('');
+        selectDia.addEventListener("change", onChangeDia)
     }
 }
 
+//podría cargar para cada película las opciones de horas y formatos, en array dentro del objeto por ejemplo
+//proxima entrega si llego
 function onChangeDia() {
-    const selectedOption = dia.options[dia.selectedIndex].value
+    const selectedOption = selectDia.options[selectDia.selectedIndex].value
     // console.log(`opcion: ${selectedOption}`)
     if (validarDia) {
         let htmlHora = document.createElement('div')
         htmlHora.innerHTML = `
-            <select name="selectHora" id="hora">
+            <select name="selectHora" id="selectHora">
                 <option selected="selected" value="">Seleccione Hora...</option>
                 <option value="1">14:30</option>
                 <option value="2">16:50</option>
@@ -91,13 +93,13 @@ function onChangeDia() {
         `
         formPelicula.appendChild(htmlHora)
         validarDia = false
-        hora = document.getElementById('hora')
-        hora.addEventListener("change", onChangeHora)
+        selectHora = document.getElementById('selectHora')
+        selectHora.addEventListener("change", onChangeHora)
     }
 }
 
 function onChangeHora() {
-    const selectedOption = hora.options[hora.selectedIndex].value
+    const selectedOption = selectHora.options[selectHora.selectedIndex].value
     // console.log(`opcion: ${selectedOption}`)
     if (validarHora) {
         let htmlSiguiente = document.createElement('div')
@@ -112,23 +114,24 @@ function onChangeHora() {
 }
 
 function sectionPrecio() {
+    formPrecio.classList.remove("disableElement");
     let htmlPrecio = document.createElement('div')
     htmlPrecio.innerHTML = `
-        <select name="selectPrecio" id="precio">
-            <option selected="selected" value="">Seleccione el Precio...</option>
-            <option value="7">NORMAL</option>
-            <option value="8">TARDE</option>
-            <option value="9">2x1</option>
+        <select name="selectPrecio" id="selectPrecio">
+            <option selected value="0">Seleccione el Precio...</option>
+            <option value="NORMAL">NORMAL</option>
+            <option value="Matiné">Matiné</option>
+            <option value="2x1">2x1</option>
         </select>
         <p></p>
         `
     formPrecio.appendChild(htmlPrecio)
-    precio = document.getElementById('precio')
-    precio.addEventListener("change", onChangePrecio)
+    selectPrecio = document.getElementById('selectPrecio')
+    selectPrecio.addEventListener("change", onChangePrecio)
 }
 
 function onChangePrecio() {
-    const selectedOption = precio.options[precio.selectedIndex].value
+    const selectedOption = selectPrecio.options[selectPrecio.selectedIndex].value
     // console.log(`opcion: ${selectedOption}`)
     if (validarPrecio) {
         let htmlSiguiente = document.createElement('div')
@@ -143,23 +146,27 @@ function onChangePrecio() {
 }
 
 function sectionAsiento() {
+    formAsiento.classList.remove("disableElement");
     let htmlAsiento = document.createElement('div')
     htmlAsiento.innerHTML = `
-        <select name="selectPrecio" id="asiento">
-            <option selected="selected" value="">Seleccione asiento...</option>
-            <option value="10">A1</option>
-            <option value="11">A2</option>
-            <option value="12">A3</option>
+        <select name="selectAsiento" id="selectAsiento">
+            <option selected vaLue="">Seleccione asiento...</option>
+            <option value="F1-A1">F1-A1</option>
+            <option value="F1-A2">F1-A2</option>
+            <option value="F2-A6<">F2-A6</option>
+            <option value="F7-A1">F7-A1</option>
+            <option value="F7-A1">F7-A2</option>
+            <option value="F7-A1">F7-A3</option>
         </select>
         <p></p>
         `
     formAsiento.appendChild(htmlAsiento)
-    asiento = document.getElementById('asiento')
-    asiento.addEventListener("change", onChangeAsiento)
+    selectAsiento = document.getElementById('selectAsiento')
+    selectAsiento.addEventListener("change", onChangeAsiento)
 }
 
 function onChangeAsiento() {
-    const selectedOption = asiento.options[asiento.selectedIndex].value
+    const selectedOption = selectAsiento.options[selectAsiento.selectedIndex].value
     // console.log(`opcion: ${selectedOption}`)
     if (validarAsiento) {
         let htmlSiguiente = document.createElement('div')
@@ -174,23 +181,24 @@ function onChangeAsiento() {
 }
 
 function sectionResumen() {
+    formResumen.classList.remove("disableElement");
     let htmlResumen = document.createElement('div')
     htmlResumen.innerHTML = `
-        <select name="selectTarjeta" id="tarjeta">
+        <select name="selectTarjeta" id="selectTarjeta">
             <option selected="selected" value="">Seleccione la Tarjeta...</option>
-            <option value="13">VISA DEBITO</option>
-            <option value="14">VISA CREDITO</option>
-            <option value="15">MASTERCARD</option>
+            <option value="VISA DEBITO">VISA DEBITO</option>
+            <option value="VISA CREDITO">VISA CREDITO</option>
+            <option value="MASTERCARD">MASTERCARD</option>
         </select>
         <p></p>
         `
     formResumen.appendChild(htmlResumen)
-    tarjeta = document.getElementById('tarjeta')
-    tarjeta.addEventListener("change", onChangeTarjeta)
+    selectTarjeta = document.getElementById('selectTarjeta')
+    selectTarjeta.addEventListener("change", onChangeTarjeta)
 }
 
 function onChangeTarjeta() {
-    const selectedOption = tarjeta.options[tarjeta.selectedIndex].value
+    const selectedOption = selectTarjeta.options[selectTarjeta.selectedIndex].value
     // console.log(`opcion: ${selectedOption}`)
     if (validarTarjeta) {
         let htmlSiguiente = document.createElement('div')
@@ -262,4 +270,36 @@ function envioFormulario() {
     // validar2 = false;
     // validar = false;
     // return datos;
+}
+
+//Días de le semana: desde el día actual + 7
+function cargarDias(dias) {
+    const fechaActual = new Date();
+    const diasAvanzados = dias - fechaActual.getDay();
+    if (diasAvanzados < 0) {
+        diasAvanzados += 7;
+    }
+
+    const fechaFinal = fechaActual.getDate() + diasAvanzados;
+    
+    const opciones = [];
+    opciones.push(
+        `<option selected value="0">Seleccione el Día...</option> `
+    );
+    for (let i = 0; i < 8; i++) {
+        const fecha = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), fechaActual.getDate() + i);
+        const dia = fecha.getDay();
+        const nombreDia = [
+            'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'
+        ];
+        const nombreMes = [
+            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+            'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+        ];
+    
+        opciones.push(
+            `<option value="${fecha.getDate()}-${nombreDia} de ${nombreMes[fecha.getMonth()]} de ${fecha.getFullYear()}">${nombreDia[fecha.getDay()]}, ${fecha.getDate()} de ${nombreMes[fecha.getMonth()]} de ${fecha.getFullYear()}</option>`
+        );
+    }
+    return opciones;
 }
