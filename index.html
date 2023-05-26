@@ -42,6 +42,9 @@
             <a class="nav-link" href="#sinopsisBanner">Sinopsis</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" id="buscarNav">Buscar</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="./pages/entradas.html">Entradas</a>
           </li>
           <li class="nav-item">
@@ -53,31 +56,34 @@
         </ul>
       </div>
     </nav>
-    <!-- Filtros -->
-    <div class="d-flex justify-content-center bg-secondary">
+    <!-- Búsquedas por nombre y por genero -->
+    <div class="d-flex justify-content-left bg-secondary disableElement" id="searchGral">
       <div class="row">
         <div class="col-12">
-          <h4><strong>Filtros</strong></h4>
-          <a class="btn btn-dark" id="filterAccion">Acción</a>
-          <a class="btn btn-dark" id="filterComedia">Comedia</a>
-          <a class="btn btn-dark" id="filterDrama">Drama</a>
-          <a class="btn btn-dark" id="filterTerror">Terror</a>
-          <a class="btn btn-dark" id="filterSuspenso">Suspenso</a>
-          <a class="btn btn-dark" id="filterFantasia">Fantasía</a>
-          <a class="btn btn-dark" id="filterAventura">Aventura</a>
-          <a class="btn btn-dark" id="filterTodas">Todas las películas</a>
+          <div id="searchBy" class="disableElement">
+            <a class="btn btn-dark" id="btnByName">Por Nombre</a>
+            <a class="btn btn-dark" id="btnByGender">Por Género</a>
+          </div>
+          <div id="searchByName" class="disableElement">
+            <input type="text" size="58" id="textoBuscar" placeholder="Ingrese el texto a buscar..."><label class="disableElement" id="labelBuscar"></label>
+          </div>
+          <div id="searchByGender" class="disableElement">
+            <select name="selectGender" id="selectBuscar">
+              <option selected="selected" value="">Seleccione el Género...</option>
+              <option value="1">Acción</option>
+              <option value="2">Comedia</option>
+              <option value="3">Drama</option>
+              <option value="4">Terror</option>
+              <option value="5">Suspenso</option>
+              <option value="6">Fantasía</option>
+              <option value="7">Aventura</option>
+            </select>
+          </div>
           <br>
-        </div>
-      </div>
-    </div>
-    <!-- Búsquedas por nombre  y por genero -->
-    <div class="d-flex justify-content-center bg-secondary">
-      <div class="row">
-        <div class="col-12">
-          <h4><strong>Buscar</strong></h4>
-          <a class="btn btn-dark" id="searchByName">Por Nombre</a>
-          <a class="btn btn-dark" id="searchByGender">Por Género</a>
-          <br>
+          <div id="searchBtns" class="disableElement">
+            <a class="btn btn-dark" id="btnSearch">Buscar</a>
+            <a class="btn btn-dark" id="btnCancel">Cancelar Búsqueda</a>
+          </div>
         </div>
       </div>
     </div>

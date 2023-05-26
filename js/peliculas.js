@@ -1,8 +1,24 @@
 const moviesList = document.querySelector("#movies-list");
 const movieSinopsis = document.querySelector("#movie-sinopsis");
-// const searchByName = document.getElementById("#searchByName");
-// const searchByGender = document.getElementById("#searchByGender");
+const navLink = document.querySelectorAll(".nav-link");
 
+const textoBuscar = document.getElementById("textoBuscar");
+const selectBuscar = document.getElementById("selectBuscar");
+const buscarNav = document.getElementById("buscarNav");
+const labelBuscar = document.getElementById("labelBuscar")
+let byName = false;
+let byGender = false;
+//contenedores div
+const searchGral = document.getElementById("searchGral");
+const searchBy = document.getElementById("searchBy");
+const searchByName = document.getElementById("searchByName");
+const searchByGender = document.getElementById("searchByGender");
+const searchBtns = document.getElementById("searchBtns");
+//botones
+const btnByName = document.getElementById("btnByName");
+const btnByGender = document.getElementById("btnByGender");
+const btnSearch = document.getElementById("btnSearch");
+const btnCancel = document.getElementById("btnCancel");
 
 class Movie {
   constructor(id, titulo, genero, minutos, origen, director, calificacion, imagen, descripcion, video) {
@@ -41,8 +57,9 @@ const movie19 = new Movie(19, "John Wick 4", "Acción", 170, "USA", " Chad Stahe
 const movie20 = new Movie(20, "Super Mario Bros: la película", "Fantasía", 93, "USA", "Aaron Horvath", "ATP", "./asset/img/supermariobros.jpg", "De Nintendo e Illumination llega una nueva película animada basada en el mundo de Super Mario Bros. Dirigida por by Aaron Horvath y Michael Jelenic (colaboradores en Los Jóvenes Titanes en acción, Jóvenes Titanes en acción: la película) de un guion de Matthew Fogel (La gran aventura LEGO 2, Minions: Nace un villano), la película es protagonizada por Chris Pratt como Mario, Anya Taylor-Joy como la Princesa Peach, Charlie Day como Luigi, Jack Black como Bowser, Keegan-Michael Key como Toad, Seth Rogen como Donkey Kong, Fred Armisen como Cranky Kong, Kevin Michael Richardson como Kamek y Sebastian Maniscalco como Spike. La película es producida por el CEO y fundador de Illumination Chris Meledandri y por Shigeru Miyamoto de Nintendo. La película es co-financiada por Universal Pictures y Nintendo y estrenada mundialmente por Universal Pictures.", "https://www.youtube.com/embed/IaqvH0eaYsE");
 
 const movies = [movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10, movie11, movie12, movie13, movie14, movie15, movie16, movie17, movie18, movie19, movie20];
+const foundMovies = [];
 
-//función de las vistas de películas
+//Función de las vistas de películas
 function renderMovies(movies, view) {
   moviesList.innerHTML = '';
   if (view === 0) { //0-LISTA
@@ -89,145 +106,219 @@ renderMoviesLista.addEventListener('click', () => {
   renderMovies(movies,0);
 });
 
-//funciones de filtros de películas
-function MoviesFilterAccion() {
-  let genero = "ACCIÓN";
-  resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
-  let msg = "Género: " + genero + "\n";
-  resultado.forEach((movie) => {
-    msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-  });
-  alert(msg);
-}
+//Funciones de filtros de películas
+// function MoviesFilterAccion() {
+//   let genero = "ACCIÓN";
+//   resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
+//   let msg = "Género: " + genero + "\n";
+//   resultado.forEach((movie) => {
+//     msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
+//   });
+//   alert(msg);
+// }
 
-function MoviesFilterComedy() {
-  let genero = "COMEDIA";
-  resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
-  let msg = "Género: " + genero + "\n";
-  resultado.forEach((movie) => {
-    msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-  });
-  alert(msg);
-}
+// function MoviesFilterComedy() {
+//   let genero = "COMEDIA";
+//   resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
+//   let msg = "Género: " + genero + "\n";
+//   resultado.forEach((movie) => {
+//     msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
+//   });
+//   alert(msg);
+// }
 
-function MoviesFilterDrama() {
-  let genero = "DRAMA";
-  resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
-  let msg = "Género: " + genero + "\n";
-  resultado.forEach((movie) => {
-    msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-  });
-  alert(msg);
-}
+// function MoviesFilterDrama() {
+//   let genero = "DRAMA";
+//   resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
+//   let msg = "Género: " + genero + "\n";
+//   resultado.forEach((movie) => {
+//     msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
+//   });
+//   alert(msg);
+// }
 
-function MoviesFilterHorror() {
-  let genero = "TERROR";
-  resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
-  let msg = "Género: " + genero + "\n";
-  resultado.forEach((movie) => {
-    msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-  });
-  alert(msg);
-}
+// function MoviesFilterHorror() {
+//   let genero = "TERROR";
+//   resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
+//   let msg = "Género: " + genero + "\n";
+//   resultado.forEach((movie) => {
+//     msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
+//   });
+//   alert(msg);
+// }
 
-function MoviesFilterThriller() {
-  let genero = "SUSPENSO";
-  resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
-  let msg = "Género: " + genero + "\n";
-  resultado.forEach((movie) => {
-    msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-  });
-  alert(msg);
-}
+// function MoviesFilterThriller() {
+//   let genero = "SUSPENSO";
+//   resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
+//   let msg = "Género: " + genero + "\n";
+//   resultado.forEach((movie) => {
+//     msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
+//   });
+//   alert(msg);
+// }
 
-function MoviesFilterFantacy() {
-  let genero = "FANTASÍA";
-  resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
-  let msg = "Género: " + genero + "\n";
-  resultado.forEach((movie) => {
-    msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-  });
-  alert(msg);
-}
+// function MoviesFilterFantacy() {
+//   let genero = "FANTASÍA";
+//   resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
+//   let msg = "Género: " + genero + "\n";
+//   resultado.forEach((movie) => {
+//     msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
+//   });
+//   alert(msg);
+// }
 
-function MoviesFilterAventure() {
-  let genero = "AVENTURA";
-  resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
-  let msg = "Género: " + genero + "\n";
-  resultado.forEach((movie) => {
-    msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-  });
-  alert(msg);
-}
+// function MoviesFilterAventure() {
+//   let genero = "AVENTURA";
+//   resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(genero));
+//   let msg = "Género: " + genero + "\n";
+//   resultado.forEach((movie) => {
+//     msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
+//   });
+//   alert(msg);
+// }
 
-filterAccion.addEventListener('click', () => {
-  MoviesFilterAccion();
-});
-filterComedia.addEventListener('click', () => {
-  MoviesFilterComedy();
-});
-filterDrama.addEventListener('click', () => {
-  MoviesFilterDrama();
-});
-filterTerror.addEventListener('click', () => {
-  MoviesFilterHorror();
-});
-filterSuspenso.addEventListener('click', () => {
-  MoviesFilterThriller();
-});
-filterFantasia.addEventListener('click', () => {
-  MoviesFilterFantacy();
-});
-filterAventura.addEventListener('click', () => {
-  MoviesFilterAventure();
-});
-filterTodas.addEventListener('click', () => {
-  MoviesFilterAccion();
-  MoviesFilterComedy();
-  MoviesFilterDrama();
-  MoviesFilterHorror();
-  MoviesFilterThriller();
-  MoviesFilterFantacy();
-  MoviesFilterAventure();
-});
+// filterAccion.addEventListener('click', () => {
+//   MoviesFilterAccion();
+// });
+// filterComedia.addEventListener('click', () => {
+//   MoviesFilterComedy();
+// });
+// filterDrama.addEventListener('click', () => {
+//   MoviesFilterDrama();
+// });
+// filterTerror.addEventListener('click', () => {
+//   MoviesFilterHorror();
+// });
+// filterSuspenso.addEventListener('click', () => {
+//   MoviesFilterThriller();
+// });
+// filterFantasia.addEventListener('click', () => {
+//   MoviesFilterFantacy();
+// });
+// filterAventura.addEventListener('click', () => {
+//   MoviesFilterAventure();
+// });
+// filterTodas.addEventListener('click', () => {
+//   MoviesFilterAccion();
+//   MoviesFilterComedy();
+//   MoviesFilterDrama();
+//   MoviesFilterHorror();
+//   MoviesFilterThriller();
+//   MoviesFilterFantacy();
+//   MoviesFilterAventure();
+// });
 
-//funciones de búsquedas de películas
+//Funciones de búsquedas de películas
 function searchMoviesName() {
-  //busqueda por nombre
-  let peliculaABuscar = prompt("Ingrese el nombre de la pelicula que quiere encontrar: ").toUpperCase();
-  let resultado = movies.filter((movie) => movie.title.toUpperCase().includes(peliculaABuscar));
-  if (resultado.length != 0) {
-    let msg = "Películas que coinciden con la búsqueda: " + peliculaABuscar + "\n";
-    resultado.forEach((movie) => {
-      msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-    });
-    alert(msg);
+  if (textoBuscar.value === "") {
+    labelBuscar.innerHTML=" << Ingrese un texto para buscar"
+    labelBuscar.classList.remove("disableElement");
+    textoBuscar.focus();
   } else {
-    alert("No se encontro la película que coincida con: " + peliculaABuscar);
+    let txt = textoBuscar.value.toUpperCase();
+    let resultado = movies.filter((movie) => movie.title.toUpperCase().includes(txt));
+    if (resultado.length != 0) {
+      let id = 0;
+      foundMovies.length = 0;
+      resultado.forEach((movie) => {
+        foundMovies.push(movie)
+        if (id===0) { //para mostrar en sinopsis la primera pelicula de la busqueda
+          id=movie.id;
+        }
+      });
+      renderMovies(foundMovies, 1);
+      showMovie(id); 
+      // resetSearch();
+      labelBuscar.innerHTML=" << Se muestran las películas con el filtro ingresado";
+      labelBuscar.classList.remove("disableElement");
+    } else {
+      labelBuscar.innerHTML=" << No se encontro ninguna película que coincida con el texto ingresado";
+      labelBuscar.classList.remove("disableElement");
+      textoBuscar.focus();
+    }
   }
 }
 
-function searchMoviesGender() {
-  //busqueda por genero
-  let peliculaABuscar = prompt("Ingrese el nombre del género cinematográfico que quiere encontrar: ").toUpperCase();
-  let resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(peliculaABuscar));
-  if (resultado.length != 0) {
-    let msg = "Géneros que coinciden con la búsqueda: " + peliculaABuscar + "\n";
-    resultado.forEach((movie) => {
-      msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
-    });
-    alert(msg);
-  } else {
-    alert("No se encontró ningún género que coincida." + peliculaABuscar);
-  }
-}
+// function searchMoviesGender() {
+//   //busqueda por genero
+//   let peliculaABuscar = prompt("Ingrese el nombre del género cinematográfico que quiere encontrar: ").toUpperCase();
+//   let resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(peliculaABuscar));
+//   if (resultado.length != 0) {
+//     let msg = "Géneros que coinciden con la búsqueda: " + peliculaABuscar + "\n";
+//     resultado.forEach((movie) => {
+//       msg = msg + " -" + movie.title + " - " + movie.gender + " - " + movie.qualification + "\n";
+//     });
+//     alert(msg);
+//   } else {
+//     alert("No se encontró ningún género que coincida." + peliculaABuscar);
+//   }
+// }
 
-searchByName.addEventListener('click', () => {
-  searchMoviesName();
+//Habilita seccion búsqueda y deshabilita buscar en menú
+buscarNav.addEventListener('click', () => {
+  //Habilita selección
+  buscarNav.classList.add("disabled");
+  searchGral.classList.remove("disableElement");
+  searchBy.classList.remove("disableElement");
 });
-searchByGender.addEventListener('click', () => {
-  searchMoviesGender();
+
+//Click de los btn de búsqueda
+btnByName.addEventListener('click', () => {
+  //La búsqueda sera por nombre
+  byName = true;
+  //Oculta selección de búsqueda y Habilita seccion búsqueda por nombre
+  searchBy.classList.add("disableElement");
+  searchByName.classList.remove("disableElement");
+  searchBtns.classList.remove("disableElement")
+  textoBuscar.classList.remove("disableElement");
+  // labelBuscar.innerHTML="";
+  textoBuscar.focus();
 });
+btnByGender.addEventListener('click', () => {
+  //La búsqueda sera por género
+  byGender = true;
+  //Oculta selección de búsqueda y Habilita seccion búsqueda por género
+  searchBy.classList.add("disableElement");
+  searchByGender.classList.remove("disableElement");
+  searchBtns.classList.remove("disableElement")
+});
+
+btnSearch.addEventListener('click', () => {
+  //Búsqueda por nombre o por genero
+  if (byName) {
+    searchMoviesName();
+  } else {
+    if (byGender) {
+      // searchMoviesGender();
+    } else {
+      alert("Seleccione una opción de búsqueda.");
+    }
+  }
+});
+btnCancel.addEventListener('click', () => {
+  resetSearch();
+  renderMovies(movies, 1);
+});
+
+//Cambio en el texto a buscar
+textoBuscar.addEventListener('keydown', function () {
+  labelBuscar.innerHTML="";
+});
+
+function resetSearch(){
+  //Habilita buscar en menú. Oculta secciones búsqueda.
+  buscarNav.classList.remove("disabled");
+  searchGral.classList.add("disableElement");
+  searchByName.classList.add("disableElement");
+  searchByGender.classList.add("disableElement");
+  searchBtns.classList.add("disableElement");
+  //Resetea variables de busqueda
+  byName = false;
+  byGender = false;
+  // Borra contenido de buscar, del label . 
+  textoBuscar.value="";
+  labelBuscar.innerHTML="";
+}
 
 //función que muestra la sinopsis de cada película
 function showMovie(id) {
@@ -235,14 +326,7 @@ function showMovie(id) {
     return movie.id === id;
   })
   if (foundMovie) {
-    // alert(`
-    //   DATOS PARA ACTUALIZAR SINOPSIS
-    //   Película: ${foundMovie.title}
-    //   Género: ${foundMovie.gender}
-    //   Calificación: ${foundMovie.qualification}
-    //   Minutos: ${foundMovie.minutes}
-    //   Descripción: ${foundMovie.description}
-    //   `);
+    //   ACTUALIZAR SINOPSIS
     movieSinopsis.innerHTML = '';
     let contenedorMovie = document.createElement('div');
     contenedorMovie.classList.add('col-12');
@@ -263,13 +347,17 @@ function showMovie(id) {
         <div class="card-footer">
           <a class="btn btn-dark" href="./pages/entradas.html">COMPRAR ENTRADAS</a>
           <a class="btn btn-dark" href="./index.html">VOLVER A CARTELERA</a>
+          
         </div>
-          <iframe src="${foundMovie.video}" title="${foundMovie.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe src="${foundMovie.video}" title="${foundMovie.title}" frameborder="0" allow="autoplay" allowfullscreen></iframe>
       </div>
       `;
     movieSinopsis.appendChild(contenedorMovie);
   }
 }
+// agregar el iframe arriba <iframe src="${foundMovie.video}" title="${foundMovie.title}" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+
+
 
 // showSinopsis.addEventListener('click', () => {
   //como le paso el id del elemento a mostrar?

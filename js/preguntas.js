@@ -1,3 +1,7 @@
+//Preguntas frecuentes
+
+//Función para el acordeón: al hacer click
+//muestra la respuesta, agragar los iconos más y menos
 const acordeon = document.getElementsByClassName("acordeon");
 const icon = document.getElementsByClassName("icon");
 

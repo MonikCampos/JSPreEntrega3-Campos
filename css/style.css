@@ -166,7 +166,18 @@ i:hover {
     width: 30px;
     height: 30px;
 }
+label {
+    color: var(--blanco);
+    text-transform: uppercase;
+}
 
+.disableElement {
+    display: none !important;
+}
+
+.d-flex {
+    padding: 5px 0 10px 5px;
+}
 .portada {
     background-color: var(--gris);
     background-image: url("../asset/img/banner.jpg");
@@ -284,7 +295,6 @@ form {
         font-size: 55px;
     }
 }
-
 
 /* Estilos para acordeón */
 .acordeon {

@@ -1,10 +1,20 @@
 const formContacto = document.getElementById("formContacto")
 const btnSubmit = document.getElementById("btnSubmit")
 const btnReset = document.getElementById("btnReset")
+let validar = false
 
 formContacto.addEventListener("submit", function (event) {
-    event.preventDefault();
-});
+    event.preventDefault()
+    if (validar) {
+        //enviar formulario
+    } else {
+        alert("Por favor complete los campos")
+    }
+})
+
+function enviarFormulario () {
+
+}
 
 btnReset.addEventListener('click', () => {
     formContacto.reset();

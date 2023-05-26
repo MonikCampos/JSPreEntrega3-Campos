@@ -1,3 +1,4 @@
+//Lógica para la vta de entradas
 const formEntradas = document.getElementById('formEntradas')
 const formPelicula = document.getElementById('formPelicula')
 const cine = document.getElementById('cine')
