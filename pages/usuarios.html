@@ -18,7 +18,7 @@
 <body>
     <header>
         <div class="jumbotrom portada" id="goTop">
-            <h1>USUARIOS</h1>
+            <h1>REGISTRO DE USUARIOS</h1>
         </div>
     </header>
     <main>
@@ -44,17 +44,26 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h2>INGRESO</h2>
-                            <P>Para comprar entradas, si ya está registrado por favor identifíquese con su email y contraseña, o regístrese <a class="btn btn-light" href="./usuarios.html">AQUÍ</a></P>
+                            <h2>NUEVO USUARIO</h2>
+                            <P>Para comprar entradas debe regístrese AQUÍ</P>
                         </div>
                         <div class="card-body">
-                            <form>
-                                <input name="dni-email" size="40" type="text" id="dni-email" PlaceHolder="DNI o Email..." /><br>
-                                <input name="contraseña" size="40" type="password" id="contraseña" PlaceHolder="Contraseña..." />
+                            <form id="formUsuarios">
+                                <input name="nombre" size="40" type="text" id="nombre" PlaceHolder="Ingrese su nombre..." /><br>
+                                <input name="apellido" size="40" type="text" id="apellido" PlaceHolder="Ingrese su apellido..." /><br>
+                                <input name="dni" size="40" type="text" id="dni" PlaceHolder="Ingrese su DNI..." /><br>
+                                <input name="email" size="40" type="text" id="email" PlaceHolder="Ingrese su email..." /><br>
+                                <input name="contraseña1" size="40" type="password" id="contraseña1" PlaceHolder="Ingrese una contraseña..." /><br>
+                                <input name="contraseña2" size="40" type="password" id="contraseña2" PlaceHolder="Reingrese la contraseña..." />
                             </form>
                         </div>
                         <div class="card-footer">
-                            <a class="btn btn-dark">INGRESAR</a>
+                            <a class="btn btn-dark" id="btnSubmit">GUARDAR</a>
+                            <a class="btn btn-dark" id="btnReset">BORRAR</a>
+                            <div id="errorDiv" class="disableElement">
+                                <br><br>
+                            <label id="errorLabel"></label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -108,7 +117,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
         integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous">
     </script>
-    <script src="./js/usuarios.js"></script>
+    <script src="../js/usuarios.js"></script>
 </body>
 
 </html>
