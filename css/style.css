@@ -175,6 +175,11 @@ label {
     display: none !important;
 }
 
+#errorDiv p{
+    text-align: center;
+    color: red;
+}
+
 .d-flex {
     padding: 5px 0 10px 5px;
 }

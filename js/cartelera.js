@@ -59,6 +59,7 @@ const movie20 = new Movie(20, "Super Mario Bros: la película", "Fantasía", 93,
 
 const movies = [movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10, movie11, movie12, movie13, movie14, movie15, movie16, movie17, movie18, movie19, movie20];
 const foundMovies = [];
+let contenedorMovieOld = "0"
 
 //Función de las vistas de películas
 function renderMovies(movies) {
@@ -67,7 +68,7 @@ function renderMovies(movies) {
   if (localStorage.getItem('view') === "lista") { 
     movies.forEach(movie => {
       if (syn===0) {
-        synopsis=movie.id
+        localStorage.setItem('synopsis', movie.id)
         syn++
       }; 
       let contenedorMovie = document.createElement('div');
@@ -79,32 +80,35 @@ function renderMovies(movies) {
           <h4>${movie.gender} - ${movie.qualification}</h4>
           <h2><strong>${movie.title}</strong></h2>
           <p>${cortarDescripcion(movie.description,60)}</p>
-          <a class="btnSynopsis" id=${movie.id} href="#sinopsisBanner"><h3>Sinopsis <i class="fa-sharp fa-solid fa-circle-play"></i></h3></a>
+          <a class="btnSynopsis" id=${movie.id} href="./pages/sinopsis.html"><h3>Sinopsis <i class="fa-sharp fa-solid fa-circle-play"></i></h3></a>
           </div>
       </div>
       `;
       contenedorMovie.innerHTML = contenedorMovie.innerHTML + `</table><hr>`;
+      contenedorMovieOld = contenedorMovie;
       moviesList.appendChild(contenedorMovie);
     });
   } else { //CUADRICULA
     movies.forEach(movie => {
       if (syn===0) {
-        synopsis=movie.id
+        localStorage.setItem('synopsis', movie.id)
         syn++;
       };
       let contenedorMovie = document.createElement('div');
       contenedorMovie.classList.add('col-sm-12');
       contenedorMovie.classList.add('col-md-6');
       contenedorMovie.classList.add('col-lg-3');
+      //href="#sinopsisBanner"
       contenedorMovie.innerHTML = `
         <div class="card">
         <img class="img-fluid" src="${movie.image}" alt="${movie.title}">
         <div class="card-body">
           <h4>${movie.gender} - ${movie.qualification}</h4>
           <h2><strong>${movie.title}</strong></h2>
-          <a class="btnSynopsis" id=${movie.id} href="#sinopsisBanner"><h3>Sinopsis <i class="fa-sharp fa-solid fa-circle-play"></i></h3></a>
+          <a class="btnSynopsis" href="./pages/sinopsis.html" id=${movie.id}><h3>Sinopsis <i class="fa-sharp fa-solid fa-circle-play"></i></h3></a>
         </div>
     `;
+      contenedorMovieOld = contenedorMovie;
       moviesList.appendChild(contenedorMovie);
     });
   }
@@ -149,8 +153,8 @@ function searchMoviesName() {
         }
       });
       renderMovies(foundMovies);
-      synopsis=id;
-      showMovie(synopsis); 
+      localStorage.setItem('synopsis', id);
+      showMovie(); 
       labelBuscar1.innerHTML=" << Se muestran las películas con el filtro ingresado";
       labelBuscar1.classList.remove("disableElement");
       textoBuscar.focus();
@@ -168,11 +172,11 @@ function searchMoviesGender() {
     labelBuscar2.classList.remove("disableElement");
     selectBuscar.focus();
   } else {
-    alert("selectBuscar.value:" + selectBuscar.value);
     let txt = selectBuscar.value.toUpperCase();
     let resultado = movies.filter((movie) => movie.gender.toUpperCase().includes(txt));
     if (resultado.length != 0) {
       let id = 0;
+      foundMovies.length = 0;
       resultado.forEach((movie) => {
         foundMovies.push(movie)
         if (id===0) { //para mostrar en sinopsis la primera pelicula de la busqueda
@@ -180,16 +184,15 @@ function searchMoviesGender() {
         }
       });
       renderMovies(foundMovies);
-      synopsis=id;
-      showMovie(synopsis); 
+      localStorage.setItem('synopsis', id);
+      showMovie(); 
       labelBuscar2.innerHTML=" << Se muestran las películas con el filtro ingresado";
       labelBuscar2.classList.remove("disableElement");
     } else {
       labelBuscar2.innerHTML=" << No se encontro ninguna película que coincida con el texto ingresado";
       labelBuscar2.classList.remove("disableElement");
       renderMovies(movies);
-      synopsis=1;
-      showMovie(synopsis);
+      showMovie();
     }
   }
 }
@@ -226,34 +229,26 @@ btnSearch.addEventListener('click', () => {
   if (byName) {
     searchMoviesName();
   } else {
+    if (byGender) {
     searchMoviesGender();
+    } else {
+      alert ("No se muestra: error");
+    }
   }
 });
 btnCancel.addEventListener('click', () => {
   resetSearch();
   renderMovies(movies);
-  synopsis=1;
-  showMovie(synopsis);
+  showMovie();
 });
 
-//Click en btn de sinopsis
-// btnSynopsis.forEach(btn => {
-//   btn.addEventListener('click', () => {
-//   synopsis=btn.id;
-//   showMovie();
-//   });
-// }) no funciona el click...ver
-for (const btn of btnSynopsis) {
-  btn.addEventListener('click', () => {
-    alert("btn.id: " + btn.id);
-    synopsis=btn.id;
-    showMovie(synopsis);
-  });
-}
+
+
+
 
 //Cambio en el texto a buscar
 textoBuscar.addEventListener('keydown', function () {
-  labelBuscar.innerHTML="";
+  labelBuscar1.innerHTML="";
 });
 
 function resetSearch(){
@@ -275,10 +270,13 @@ function resetSearch(){
 }
 
 //función que muestra la sinopsis de cada película
-function showMovie(id) {
+function showMovie() {
+  alert("entro a show movie")
+  let id = localStorage.getItem('synopsis');
   let foundMovie = movies.find((movie) => {
     return movie.id === id;
   })
+  alert("localStorage.getItem('synopsis'): " + localStorage.getItem('synopsis'));
   if (foundMovie) {
     //   ACTUALIZAR SINOPSIS
     movieSinopsis.innerHTML = '';
@@ -316,11 +314,10 @@ $(document).ready(function () {
 });
 
 //llamadas a funciones iniciales
-
 //vista y sinopsis por defecto
 localStorage.setItem('view', "cuadricula");
-let synopsis = 1;
+localStorage.setItem('synopsis', 1);
 //vista cuadricula de la cartelera
 renderMovies(movies);
 //carga primera sinopsis
-showMovie(synopsis);
+showMovie();

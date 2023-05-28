@@ -14,6 +14,11 @@ let validar = false;
 
 formUsuarios.addEventListener("submit", function (event) {
     event.preventDefault();
+    nombre.focus();
+});
+
+formUsuarios.addEventListener('load', function (event) {
+    nombre.focus();
 });
 
 //Funcion para validar que todos los datos tengan contenido
@@ -22,11 +27,13 @@ function validarFormulario() {
     alert("nombre.value: " + nombre.value);
     if (nombre.value == "" || apellido.value == "" || dni.value == "" || email.value == "" || contraseña1.value == "" || contraseña2.value == "") {
         errorLabel.innerText="Para poder guardar el usuario debe completar todos sus datos!";
+        errorDiv.classList.remove("disableElement");
         validar = false;
         return false;
     } else {
         if (contraseña1.value != contraseña2.value) {
             errorLabel.innerText="Las contraseñas no coinciden!, ingreselas nuevamente";
+            errorDiv.classList.remove("disableElement");
             contraseña1.value="";
             contraseña2.value="";
             contraseña1.focus();
@@ -40,43 +47,38 @@ function validarFormulario() {
 }
 
 function enviarFormulario() {
-    alert("se envia el form");
-    alert(`
-        DATOS PARA ENVIAR CORREO DE VERIFICACIÓN
-        Nombre: ${nombre}
-        Apellido: ${apellido}
-        DNI: ${dni}
-        Usuario/Email: ${email}
-        Contraseña: ${contraseña}
-        `);
-
     //Guardar los datos del usuario en un JSON para la BD
-    let usuarios = {
-        nombre,
-        apellido,
-        dni,
-        email,
-        contraseña1,
+    let usuario = {
+        nombre: nombre.value,
+        apellido: apellido.value,
+        dni: dni.value,
+        email: email.value,
+        contraseña1: contraseña1.value
     };
+    
     //Json
-    // let json = JSON.stringify(usuarios);
-
+    let json = JSON.stringify(usuario);
+    //Guardar en BD
+    
     //Guardar los datos en el localStorage para simular el funcionamiento de la app
-    // localStorage.setItem("nombre", nombre);
-    // localStorage.setItem("apellido", apellido);
-    // localStorage.setItem("email", email);
-    // localStorage.setItem("contraseña", contraseña);
+    localStorage.setItem("nombre", nombre.value);
+    localStorage.setItem("apellido", apellido.value);
+    localStorage.setItem("email", email);
+    localStorage.setItem("contraseña", contraseña);
 
     formUsuarios.reset();
+    errorLabel.innerText="";
 }
 
 btnReset.addEventListener("click", () => {
     formUsuarios.reset();
+    errorLabel.innerText="";
 });
 
 btnSubmit.addEventListener("click", () => {
-    
     if (validarFormulario()) {
         enviarFormulario();
+        window.location.href = "../pages/login.html";
     }
+    
 });
