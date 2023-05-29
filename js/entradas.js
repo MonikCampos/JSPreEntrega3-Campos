@@ -1,7 +1,8 @@
 //Lógica para la vta de entradas
 const formEntradas = document.getElementById('formEntradas')
 const formPelicula = document.getElementById('formPelicula')
-const selectCine = document.getElementById('selectCine')
+let selectCine = document.getElementById('selectCine')
+const saludoUsr = document.getElementById('saludoUsr')
 selectCine.addEventListener("change", onChangeCine)
 
 let selectFormato = null
@@ -23,6 +24,8 @@ let validarPrecio = true
 let validarAsiento = true
 let validarTarjeta = true
 let validarResumen = true
+
+
 
 formEntradas.addEventListener('submit', function (event) {
     event.preventDefault()
@@ -303,3 +306,17 @@ function cargarDias(dias) {
     }
     return opciones;
 }
+
+function validarUsr() {
+    if (localStorage.getItem('nombre') != null && localStorage.getItem('apellido') != null && localStorage.getItem('contraseña') !=null || localStorage.getItem('email') != null) {
+        saludoUsr.classList.remove("disableElement");
+        saludoUsr.innerHTML = `Hola ${localStorage.getItem('nombre')} ${localStorage.getItem('apellido')}!`;
+        selectCine.classList.remove("disableElement");
+    } else {
+        saludoUsr.classList.remove("disableElement");
+        saludoUsr.innerHTML = 'Para comprar entradas, si ya está registrado por favor identifíquese con su email y contraseña <a class="btn btn-light" href="./login.html">AQUÍ</a>';
+        selectCine.classList.add("disableElement");
+    }
+}
+
+validarUsr();

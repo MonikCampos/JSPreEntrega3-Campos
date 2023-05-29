@@ -19,7 +19,7 @@ const btnByName = document.getElementById("btnByName");
 const btnByGender = document.getElementById("btnByGender");
 const btnSearch = document.getElementById("btnSearch");
 const btnCancel = document.getElementById("btnCancel");
-const btnSynopsis = document.getElementsByClassName("btnSynopsis");
+const btnSynopsis = document.getElementsByClassName("btnSynopsis"); //o querySelectorAll
 
 class Movie {
   constructor(id, titulo, genero, minutos, origen, director, calificacion, imagen, descripcion, video) {
@@ -221,19 +221,23 @@ btnByGender.addEventListener('click', () => {
   //Oculta selección de búsqueda y Habilita seccion búsqueda por género
   searchBy.classList.add("disableElement");
   searchByGender.classList.remove("disableElement");
-  searchBtns.classList.remove("disableElement")
+  searchBtns.classList.remove("disableElement");
+  btnSearch.classList.add("disableElement");
 });
-btnSearch.addEventListener('click', () => {
-  //Búsqueda por nombre o por genero
-  if (byName) {
+
+textoBuscar.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    // La tecla Enter se presionó
     searchMoviesName();
-  } else {
-    if (byGender) {
-    searchMoviesGender();
-    } else {
-      alert ("No se muestra: error");
-    }
   }
+});
+selectBuscar.addEventListener('change', function(event) {
+  searchMoviesGender();
+});
+
+btnSearch.addEventListener('click', () => {
+  //Búsqueda por nombre
+  searchMoviesName();
 });
 btnCancel.addEventListener('click', () => {
   resetSearch();
@@ -260,6 +264,9 @@ function resetSearch(){
   searchByName.classList.add("disableElement");
   searchByGender.classList.add("disableElement");
   searchBtns.classList.add("disableElement");
+  if (byGender) {
+    btnSearch.classList.remove("disableElement");
+  }
   //Resetea variables de busqueda
   foundMovies.length = 0;
   byName = false;

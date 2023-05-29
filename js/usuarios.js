@@ -57,8 +57,8 @@ function enviarUsrFormulario() {
     //Guardar los datos en el localStorage para simular el funcionamiento de la app
     localStorage.setItem("nombre", nombre.value);
     localStorage.setItem("apellido", apellido.value);
-    localStorage.setItem("email", email);
-    localStorage.setItem("contraseña", contraseña);
+    localStorage.setItem("email", email.value);
+    localStorage.setItem("contraseña", contraseña1.value);
 
     formUsuarios.reset();
     errorLabel.innerText="";
