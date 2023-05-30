@@ -116,10 +116,29 @@ function renderMovies(movies) {
 
 renderMoviesLista.addEventListener('click', () => {
   //almaceno en el session storage el modo de visualización de la cartelera
+  Swal.fire({
+    title: 'Visualizará la cartelera en modo Listado',
+    confirmButtonColor: '#7E8ECB',
+    showClass: {
+      popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+    }
+  })
   localStorage.setItem('view', "lista");
   renderMovies(movies);
 });
 renderMoviesCuadricula.addEventListener('click', () => {
+  Swal.fire({
+    title: 'Visualizará la cartelera en modo Cuadrícula',
+    showClass: {
+      popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+    }
+  })
   //almaceno en el session storage el modo de visualización de la cartelera
   localStorage.setItem('view', "cuadricula");
   renderMovies(movies);
@@ -327,3 +346,4 @@ localStorage.setItem('synopsis', 1);
 //vista cuadricula de la cartelera
 renderMovies(movies);
 showMovie(1);
+
