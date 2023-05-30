@@ -23,6 +23,7 @@
     </header>
     <main>
         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <p id="faUsr"></p>
             <a class="navbar-brand" href="../pages/login.html" data-toggle="popover" data-trigger="focus" title="Login"
                 data-content="Ingresa con tu usuario para adquirir la entrada"><i class="fa-solid fa-user"></i></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -55,18 +56,18 @@
                         </div>
                         <form id="formEntradas">
                             <div class="card-body">
-                                <div id="formPelicula">
-                                    <h3>Selección de película</h3>
+                                <h4 id="sectionMovie"></h4>
+                                <div id="formPelicula" class="disableElement">
                                     <div>
-                                        <!-- <p>Seleccione el <strong>cine</strong></p> -->
+                                    <!-- <p>Seleccione el <strong>cine</strong></p> -->
                                         <select name="selectCine" id="selectCine" class="disableElement">
                                             <option selected value="">Seleccione Cine...</option>
-                                            <option value="1">CINEMA Haedo</option>
-                                            <option value="2">CINEMA Cordoba</option>
-                                            <option value="3">CINEMA Norcenter</option>
-                                            <option value="4">CINEMA Belgrano</option>
-                                            <option value="5">CINEMA Quilmes</option>
-                                            <option value="6">CINEMA Rosario</option>
+                                            <option value="CINEMA Haedo">CINEMA Haedo</option>
+                                            <option value="CINEMA Cordoba">CINEMA Cordoba</option>
+                                            <option value="CINEMA Norcenter">CINEMA Norcenter</option>
+                                            <option value="CINEMA Belgrano">CINEMA Belgrano</option>
+                                            <option value="CINEMA Quilmes">CINEMA Quilmes</option>
+                                            <option value="CINEMA Rosario">CINEMA Rosario</option>
                                         </select>
                                         <p></p>
                                     </div>

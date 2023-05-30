@@ -180,6 +180,10 @@ label {
     color: red;
 }
 
+#faUsr {
+    color: var(--grisClaro);
+}
+
 .d-flex {
     padding: 5px 0 10px 5px;
 }

@@ -1,3 +1,4 @@
+const faUsr = document.getElementById("faUsr");
 const moviesList = document.querySelector("#movies-list");
 const movieSinopsis = document.querySelector("#movie-sinopsis");
 
@@ -60,6 +61,13 @@ const movie20 = new Movie(20, "Super Mario Bros: la película", "Fantasía", 93,
 const movies = [movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10, movie11, movie12, movie13, movie14, movie15, movie16, movie17, movie18, movie19, movie20];
 const foundMovies = [];
 
+function validarUsr() {
+  if (localStorage.getItem('nombre') != null && localStorage.getItem('apellido') != null && localStorage.getItem('contraseña') !=null || localStorage.getItem('email') != null) {
+      //Asigna el nombre del usuario logueado a la página
+      faUsr.innerHTML = localStorage.getItem('nombre');
+  } 
+}
+validarUsr();
 //Función de las vistas de películas
 function renderMovies(movies) {
   moviesList.innerHTML = '';
@@ -331,6 +339,7 @@ function showMovie(id) {
       </div>
       `;
     movieSinopsis.appendChild(contenedorMovie);
+    localStorage.setItem('pelicula', foundMovie.title);
   }
 }
 

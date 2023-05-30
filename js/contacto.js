@@ -1,6 +1,7 @@
 const formContacto = document.getElementById("formContacto")
 const btnSubmit = document.getElementById("btnSubmit")
 const btnReset = document.getElementById("btnReset")
+const faUsr = document.getElementById("faUsr");
 let validar = false
 
 formContacto.addEventListener("submit", function (event) {
@@ -11,6 +12,15 @@ formContacto.addEventListener("submit", function (event) {
         alert("Por favor complete los campos")
     }
 })
+
+function validarUsr() {
+    if (localStorage.getItem('nombre') != null && localStorage.getItem('apellido') != null && localStorage.getItem('contraseña') !=null || localStorage.getItem('email') != null) {
+        //Asigna el nombre del usuario logueado a la página
+        faUsr.innerHTML = localStorage.getItem('nombre');
+    } 
+}
+
+validarUsr();
 
 function enviarFormulario () {
 

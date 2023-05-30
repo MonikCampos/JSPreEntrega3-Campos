@@ -4,6 +4,7 @@
 //muestra la respuesta, agragar los iconos más y menos
 const acordeon = document.getElementsByClassName("acordeon");
 const icon = document.getElementsByClassName("icon");
+const faUsr = document.getElementById("faUsr");
 
 for (let i = 0; i < acordeon.length; i++) {
     acordeon[i].addEventListener("click", function () {
@@ -21,3 +22,12 @@ for (let i = 0; i < acordeon.length; i++) {
         }
     });
 }
+
+function validarUsr() {
+    if (localStorage.getItem('nombre') != null && localStorage.getItem('apellido') != null && localStorage.getItem('contraseña') !=null || localStorage.getItem('email') != null) {
+        //Asigna el nombre del usuario logueado a la página
+        faUsr.innerHTML = localStorage.getItem('nombre');
+    } 
+}
+
+validarUsr();
