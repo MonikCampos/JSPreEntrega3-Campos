@@ -1,4 +1,4 @@
-//Lógica para la vta de entradas
+ //Lógica para la vta de entradas
 const formEntradas = document.getElementById('formEntradas')
 const formPelicula = document.getElementById('formPelicula')
 const formPrecio = document.getElementById('formPrecio')
@@ -9,6 +9,7 @@ const saludoUsr = document.getElementById('saludoUsr')
 const faUsr = document.getElementById('faUsr')
 const sectionMovie = document.getElementById('sectionMovie')
 selectCine.addEventListener('change', onChangeCine)
+const idVta = 0
 
 let selectPelicula = null
 let selectFormato = null
@@ -22,6 +23,7 @@ let selectAsiento = null
 let siguienteAsiento = null
 let selectTarjeta = null
 let siguienteResumen = null
+let pagar = null
 
 let validar = false
 let validarPelicula = false
@@ -42,6 +44,7 @@ formEntradas.addEventListener('submit', function (event) {
     }
 });
 
+//Busca si hay usuario logueado para asignarle la compra y saludarlo
 function validarUsr() {
     if (localStorage.getItem('nombre') != null && localStorage.getItem('apellido') != null && localStorage.getItem('contraseña') !=null || localStorage.getItem('email') != null) {
         //Saluda y habilita a comprar entradas
@@ -52,56 +55,89 @@ function validarUsr() {
         formPelicula.classList.remove("disableElement");
         selectCine.classList.remove("disableElement");
     } else {
+        //si no encuentra usuario logueado, lo redirecciona al loguin, no permite compra
         saludoUsr.classList.remove("disableElement");
         saludoUsr.innerHTML = 'Para comprar entradas, si ya está registrado por favor identifíquese con su email y contraseña <a class="btn btn-light" href="./login.html">AQUÍ</a>';
-        selectCine.classList.add("disableElement");
-        formPelicula.classList.add("disableElement");
+        formEntradas.classList.add("disableElement");
     }
 }
+
+//Función que busca si hay una película seleccionada en el localstorage para empezar la compra de entrada asociada
 function validarMovie() {
     if (localStorage.getItem('pelicula') != null) {
         //Muestra el nombre de la película
-        sectionMovie.innerHTML = `Película seleccionada: ${localStorage.getItem('pelicula')}<br> 
+        sectionMovie.innerHTML = `<h3>Película seleccionada: ${localStorage.getItem('pelicula')}</h3><br> 
         <a class="btn btn-dark" id="otraPelicula">SELECCIONAR OTRA PELÍCULA</a> 
         <a class="btn btn-dark" href="../index.html">IR A CARTELERA</a>`;
+        //Btn que permite cambiar la selección de película
         let otraPelicula = document.getElementById("otraPelicula");
         otraPelicula.addEventListener('click', function () {
             //Limpia la selección de la película
             selectCine.classList.add("disableElement");
             localStorage.setItem('pelicula', null);
             sectionMovie.innerHTML = `<h3>Selección de película</h3>
-                <select name="selectPelicula" id="selectPelicula">
+                    <select name="selectPelicula" id="selectPelicula">
                     <option selected value="0">Seleccione Película...</option>
                     <option value="La Sirenita">La Sirenita</option>
                     <option value="Cuando ellas quieren más">Cuando ellas quieren más</option>
                     <option value="Amor a primer mensaje">Amor a primer mensaje</option>
+                    <option value="Cría Siniestra">Cría Siniestra</option>
+                    <option value="Último recurso">Último recurso</option>
+                    <option value="La Barbarie">La Barbarie</option>
+                    <option value="El triunfo">El triunfo</option>
+                    <option value="La sudestada">La sudestada</option>
+                    <option value="Guardianes de la Galaxia Vol. 3">Guardianes de la Galaxia Vol. 3</option>
+                    <option value="Misántropo">Misántropo</option>
+                    <option value="Vera">Vera</option>
+                    <option value="Rápidos y Furiosos X">Rápidos y Furiosos X</option>
+                    <option value="Sombras de un crimen">Sombras de un crimen</option>
+                    <option value="La extorsión">La extorsión</option>
+                    <option value="John Wick 4">John Wick 4</option>
+                    <option value="Super Mario Bros: la película">Super Mario Bros: la película</option>
                 </select>
             <p></p>
             `;
             selectPelicula = document.getElementById('selectPelicula')
             selectPelicula.addEventListener("change", onChangePelicula)
         });
+        formPelicula.classList.remove("disableElement")
+        selectCine.classList.remove("disableElement")
         validarPelicula=true;
         return true;
     } else {
+        //No hay pelicual seleccionada, select que permite cambiar la elegir de película
         sectionMovie.innerHTML = `<h3>Selección de película</h3>
         <select name="selectPelicula" id="selectPelicula">
             <option selected value="0">Seleccione Película...</option>
             <option value="La Sirenita">La Sirenita</option>
             <option value="Cuando ellas quieren más">Cuando ellas quieren más</option>
             <option value="Amor a primer mensaje">Amor a primer mensaje</option>
+            <option value="Cría Siniestra">Cría Siniestra</option>
+            <option value="Último recurso">Último recurso</option>
+            <option value="La Barbarie">La Barbarie</option>
+            <option value="El triunfo">El triunfo</option>
+            <option value="La sudestada">La sudestada</option>
+            <option value="Guardianes de la Galaxia Vol. 3">Guardianes de la Galaxia Vol. 3</option>
+            <option value="Misántropo">Misántropo</option>
+            <option value="Vera">Vera</option>
+            <option value="Rápidos y Furiosos X">Rápidos y Furiosos X</option>
+            <option value="Sombras de un crimen">Sombras de un crimen</option>
+            <option value="La extorsión">La extorsión</option>
+            <option value="John Wick 4">John Wick 4</option>
+            <option value="Super Mario Bros: la película">Super Mario Bros: la película</option>
         </select>
     <p></p>
     `;
     selectPelicula = document.getElementById('selectPelicula')
     selectPelicula.addEventListener("change", onChangePelicula)
-    validarPelicula=false;
-    return false;
+    validarPelicula=false
+    return false
     }
 }
 
-validarUsr();
-validarMovie();
+// limpiarEntrada()
+validarUsr()
+validarMovie()
 
 //Si se seleccionó peli, la guarda en el localstorage y carga el select de Formato
 function onChangePelicula() {
@@ -110,6 +146,7 @@ function onChangePelicula() {
         localStorage.setItem("pelicula", selectedOption)
     } else {
         localStorage.setItem("pelicula", selectedOption)
+        formPelicula.classList.remove("disableElement")
         selectCine.classList.remove("disableElement")
         validarPelicula = true
     }
@@ -140,7 +177,6 @@ function onChangeCine() {
         }
 }
 
-
 //Si se seleccionó formato, lo guarda en el localstorage y carga el select de día (una semana), hice la función
 function onChangeFormato() {
     const selectedOption = selectFormato.options[selectFormato.selectedIndex].value
@@ -165,7 +201,31 @@ function onChangeFormato() {
         }
 }
 
-//Si se seleccionó formato, lo guarda en el localstorage y carga el select de hora de la función
+//Días de le semana: desde el día actual + 7
+function cargarDias(dias) {
+    const fechaActual = new Date()
+    const diasAvanzados = dias - fechaActual.getDay()
+    if (diasAvanzados < 0) {
+        diasAvanzados += 7
+    }
+    const fechaFinal = fechaActual.getDate() + diasAvanzados
+    const opciones = []
+    opciones.push(
+        `<option selected value="0">Seleccione el Día...</option> `
+    )
+    for (let i = 0; i < 8; i++) {
+        const fecha = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), fechaActual.getDate() + i)
+        const dia = fecha.getDay()
+        const nombreDia = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
+        const nombreMes = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+        opciones.push(
+            `<option value="${nombreDia[fecha.getDay()]}, ${fecha.getDate()} de ${nombreMes[fecha.getMonth()]} de ${fecha.getFullYear()}">${nombreDia[fecha.getDay()]}, ${fecha.getDate()} de ${nombreMes[fecha.getMonth()]} de ${fecha.getFullYear()}</option>`
+        )
+    }
+    return opciones
+}
+
+//Si se seleccionó el día, lo guarda en el localstorage y carga el select de horas 
 function onChangeDia() {
     const selectedOption = selectDia.options[selectDia.selectedIndex].value
     // console.log(`opcion: ${selectedOption}`)
@@ -192,10 +252,8 @@ function onChangeDia() {
 }
 
 //Si se seleccionó cine, formato, día y hora , aparece el btn siguiente, guarda hora en el localstorage 
-//Muestra los datos seleccionados hasta el momento
 function onChangeHora() {
     const selectedOption = selectHora.options[selectHora.selectedIndex].value
-    // console.log(`opcion: ${selectedOption}`)
     if (validarHora) {
         localStorage.setItem("horaEntrada", selectedOption);
         } else {
@@ -205,6 +263,9 @@ function onChangeHora() {
                 <p>
                     <a class="btn btn-dark" id="siguienteCine">SIGUIENTE</a>
                 </p>
+                <p>
+                    <a class="btn btn-dark" href="../pages/entradas.html">CANCELAR COMPRA</a>
+                </p>
             `
             formPelicula.appendChild(htmlSiguiente)
             validarHora = false
@@ -213,6 +274,8 @@ function onChangeHora() {
         }
 }
 
+//Muestra los datos seleccionados hasta el momento, oculta la seleccion anterior de opciones de película
+//Crea dos select de propociones/precios y cantidad de entradas
 function sectionPrecio() {
     sectionMovie.classList.add("disableElement")
     formPelicula.classList.add("disableElement")
@@ -222,14 +285,14 @@ function sectionPrecio() {
         <h4>Usted ha seleccionado la película: ${localStorage.getItem('pelicula')}. <br>Formato ${localStorage.getItem('formatoEntrada')}, 
         en el cine ${localStorage.getItem('cineEntrada')}. <br>Día: ${localStorage.getItem('diaEntrada')} 
         a las ${localStorage.getItem('horaEntrada')} hrs.</h4>
-        <br>
+        <h3>Selección de la promoción</h3>
         <p>
         <select name="selectPrecio" id="selectPrecio">
-            <option selected value="0">Seleccione el Precio...</option>
+            <option selected value="0">Seleccione la Promoción...</option>
             <option value="Adultos-$1500">Adultos-$1500</option>
             <option value="Menores hasta 12 años-$1100">Menores hasta 12 años-$1100</option>
             <option value="Matiné-$1100">Matiné-$1100</option>
-            <option value="2x1-$1700">2x1-$1700</option>
+            <option value="2x1-$1700">2x1-$1700 S/C</option>
         </select>
         <select name="selectCantidad" id="selectCantidad" class="disableElement">
             <option selected value="0">Cantidad de entradas...</option>
@@ -250,6 +313,7 @@ function sectionPrecio() {
         <p>Promociones: Los beneficios 2x1 incluyen cada uno dos entradas, seleccione solo 1 para obtener 2 entradas.</p>
         `
     formPrecio.appendChild(htmlPrecio)
+
     selectPrecio = document.getElementById('selectPrecio')
     selectPrecio.addEventListener("change", onChangePrecio)
     
@@ -257,9 +321,9 @@ function sectionPrecio() {
     selectCantidad.addEventListener("change", onChangeCantidad)
 }
 
+//Si se seleccionó precio, aparece la opción de seleccion de cantidad de entradas, guarda precio en el localstorage 
 function onChangePrecio() {
     const selectedOption = selectPrecio.options[selectPrecio.selectedIndex].value
-    // console.log(`opcion: ${selectedOption}`)
     if (validarPrecio) {
         localStorage.setItem("precioEntrada", selectedOption)
     } else {
@@ -269,9 +333,9 @@ function onChangePrecio() {
     }
 }
 
+//Si se seleccionó la cantidad, aparece el btn siguiente, calcula el monto total y guarda la cantidad en el localstorage 
 function onChangeCantidad() {
     const selectedOption = selectCantidad.options[selectCantidad.selectedIndex].value
-    // console.log(`opcion: ${selectedOption}`)
     if (validarCantidad) {
         localStorage.setItem("cantidadEntrada", selectedOption)
     } else {
@@ -281,18 +345,55 @@ function onChangeCantidad() {
         <p>
             <a class="btn btn-dark" id="siguientePrecio">SIGUIENTE</a>
         </p>
+        <p>
+            <a class="btn btn-dark" href="../pages/entradas.html">CANCELAR COMPRA</a>
+        </p>
         `
         formPrecio.appendChild(htmlSiguiente)
-        validarPrecio = true
+        validarCantidad = true
         siguientePrecio = document.getElementById('siguientePrecio')
         siguientePrecio.addEventListener("click", sectionAsiento)
     }
 }
 
+function calcularTotalEntradas() {
+    let promo = localStorage.getItem("precioEntrada")
+    let cant = localStorage.getItem("cantidadEntrada")
+    let precio = 0 
+    let total = 0
+    let cargo = cant*50
+    switch (promo) {
+        case "Adultos-$1500":
+            precio = 1500
+            total = (precio*cant)+cargo
+            break
+        case "Menores hasta 12 años-$1100":
+            precio = 1100
+            total = (precio*cant)+cargo
+            break
+        case "Matiné-$1100":
+            precio = 1100
+            total = (precio*cant)+cargo
+            break;
+        case "2x1-$1700":
+            precio = 1700
+            total = (precio*cant)
+            break;
+        default:
+            alert("No existe la promo, error");
+            break;
+    }
+    localStorage.setItem("totalEntrada", total)
+}
 
 function sectionAsiento() {
+    //Calculo el monto de la compra
+    calcularTotalEntradas()
+
+    //Deshabilito secciones anteriores, cargo select de asientos (ver para mas de una entrada)
     formPrecio.classList.add("disableElement")
     formAsiento.classList.remove("disableElement")
+    
     let htmlAsiento = document.createElement('div')
     htmlAsiento.innerHTML = `
         <h4>Usted ha seleccionado la película: ${localStorage.getItem('pelicula')}. <br>Formato ${localStorage.getItem('formatoEntrada')}, 
@@ -301,17 +402,18 @@ function sectionAsiento() {
         <br>
         <h4>Promoción: ${localStorage.getItem('precioEntrada')}. Cantidad de entradas: ${localStorage.getItem('cantidadEntrada')}</h4>
         <br>
-        <h4>A pagar: $${localStorage.getItem('totalEntrada')}.</h4>
+        <h4><b>A pagar: $${localStorage.getItem('totalEntrada')}</b></h4>
+        <h3>Selección de asiento</h3>
         <p>
-        <select name="selectAsiento" id="selectAsiento">
-            <option selected vaLue="">Seleccione asiento...</option>
-            <option value="F1-A1">F1-A1</option>
-            <option value="F1-A2">F1-A2</option>
-            <option value="F2-A6">F2-A6</option>
-            <option value="F7-A1">F7-A1</option>
-            <option value="F7-A1">F7-A2</option>
-            <option value="F7-A1">F7-A3</option>
-        </select>
+            <select name="selectAsiento" id="selectAsiento">
+                <option selected vaLue="">Seleccione asiento...</option>
+                <option value="F1-A1">F1-A1</option>
+                <option value="F1-A2">F1-A2</option>
+                <option value="F2-A6">F2-A6</option>
+                <option value="F7-A1">F7-A1</option>
+                <option value="F7-A1">F7-A2</option>
+                <option value="F7-A1">F7-A3</option>
+            </select>
         </p>
         `
     formAsiento.appendChild(htmlAsiento)
@@ -321,7 +423,6 @@ function sectionAsiento() {
 
 function onChangeAsiento() {
     const selectedOption = selectAsiento.options[selectAsiento.selectedIndex].value
-    // console.log(`opcion: ${selectedOption}`)
     if (validarAsiento) {
         localStorage.setItem("asientoEntrada", selectedOption)
     } else {
@@ -330,6 +431,9 @@ function onChangeAsiento() {
         htmlSiguiente.innerHTML = `
             <p>    
                 <a class="btn btn-dark" id="siguienteAsiento">SIGUIENTE</a>
+            </p>
+            <p>
+                <a class="btn btn-dark" href="../pages/entradas.html">CANCELAR COMPRA</a>
             </p>
         `
         formAsiento.appendChild(htmlSiguiente)
@@ -344,13 +448,14 @@ function sectionResumen() {
     formResumen.classList.remove("disableElement");
     let htmlResumen = document.createElement('div')
     htmlResumen.innerHTML = `
+        <h3>Resumen de transacción</h3>
         <h4>Usted ha seleccionado la película: ${localStorage.getItem('pelicula')}. <br>Formato ${localStorage.getItem('formatoEntrada')}, 
         en el cine ${localStorage.getItem('cineEntrada')}. <br>Día: ${localStorage.getItem('diaEntrada')} 
         a las ${localStorage.getItem('horaEntrada')} hrs. Asientos: ${localStorage.getItem('asientoEntrada')}</h4>
         <br>
         <h4>Promoción: ${localStorage.getItem('precioEntrada')}. Cantidad de entradas: ${localStorage.getItem('cantidadEntrada')}</h4>
         <br>
-        <h4>A pagar: $${localStorage.getItem('totalEntrada')}.</h4>
+        <h4>Total a pagar: $${localStorage.getItem('totalEntrada')}.</h4>
         <br> 
         <h3>Forma de pago online</h3>   
         <p>
@@ -369,7 +474,6 @@ function sectionResumen() {
 
 function onChangeTarjeta() {
     const selectedOption = selectTarjeta.options[selectTarjeta.selectedIndex].value
-    // console.log(`opcion: ${selectedOption}`)
     if (validarTarjeta) {
         localStorage.setItem("tarjetaEntrada", selectedOption)
     } else {
@@ -388,16 +492,20 @@ function onChangeTarjeta() {
 }
 
 function pagarEntrada() {
-    formEntradas.classList.add("disableElement")
     formResumen.classList.add("disableElement")
+    formEntradas.classList.add("disableElement")
+    formPagar.classList.remove("disableElement")
     let htmlPagar = document.createElement('div')
     htmlPagar.innerHTML = `
         <h2>RESUMEN DE LA COMPRA</H2>
-        <h4>Usted ha seleccionado la película: ${localStorage.getItem('pelicula')}<br> Formato ${localStorage.getItem('formatoEntrada')}, 
-        en el cine ${localStorage.getItem('cineEntrada')}.<br> Día: ${localStorage.getItem('diaEntrada')} 
-        a las ${localStorage.getItem('horaEntrada')} hrs. Asiento: ${localStorage.getItem('asientoEntrada')} </h4>
-        <h4>Cantidad de entradas: ${localStorage.getItem('cantidadEntrada')}. Precio: ${localStorage.getItem('precioEntrada')}, para pagar con la tarjeta ${localStorage.getItem('tarjetaEntrada')}.</h4>
-        <h4><a class="btn btn-dark" id="pagar">PAGAR</a></h4>
+        <h3>Usted ha seleccionado la película: ${localStorage.getItem('pelicula')}</h3> 
+        <h4>Formato ${localStorage.getItem('formatoEntrada')}, en el cine ${localStorage.getItem('cineEntrada')}.<br> 
+        Día: ${localStorage.getItem('diaEntrada')} a las ${localStorage.getItem('horaEntrada')} hrs. Asiento: ${localStorage.getItem('asientoEntrada')}</h4>
+        <h4>Promoción: ${localStorage.getItem('precioEntrada')}. Cantidad de entradas: ${localStorage.getItem('cantidadEntrada')}</h4>
+        <br>
+        <h4>Total a pagar: $${localStorage.getItem('totalEntrada')}, para pagar con la tarjeta ${localStorage.getItem('tarjetaEntrada')}.</h4>
+        <p><a class="btn btn-dark" id="pagar">PAGAR</a></p>
+        <p><a class="btn btn-dark" href="../pages/entradas.html">CANCELAR COMPRA</a></p>
     `
     formPagar.appendChild(htmlPagar)
     validar=true
@@ -406,33 +514,33 @@ function pagarEntrada() {
 }
 
 function limpiarEntrada() {
-    localStorage.setItem('pelicula', "");
-    localStorage.setItem('cineEntrada', "");
-    localStorage.setItem('formatoEntrada', "");
-    localStorage.setItem('diaEntrada', "");
-    localStorage.setItem('horaEntrada', "");
-    localStorage.setItem('asientoEntrada', "");
-    localStorage.setItem('cantidadEntrada', "");
-    localStorage.setItem('precioEntrada', "");
-    localStorage.setItem('tarjetaEntrada', "");
-    // no hice las validaciones todavía
-    // validar = false
-    // validarPelicula = false
-    // validarCine = true
-    // validarFormato = true
-    // validarDia = true
-    // validarHora = true
-    // validarPrecio = true
-    // validarCantidad = true
-    // validarAsiento = true
-    // validarTarjeta = true
-    // validarResumen = true
+    if (validar) {
+        localStorage.removeItem('pelicula')
+    }
+    localStorage.removeItem('cineEntrada')
+    localStorage.removeItem('formatoEntrada')
+    localStorage.removeItem('diaEntrada')
+    localStorage.removeItem('horaEntrada')
+    localStorage.removeItem('asientoEntrada')
+    localStorage.removeItem('cantidadEntrada')
+    localStorage.removeItem('precioEntrada')
+    localStorage.removeItem('tarjetaEntrada')
+    validar = false
+    validarPelicula = false
+    validarCine = false
+    validarFormato = false
+    validarDia = false
+    validarHora = false
+    validarPrecio = false
+    validarCantidad = false
+    validarAsiento = false
+    validarTarjeta = false
+    validarResumen = false
     formPelicula.classList.add("disableElement");
     formPrecio.classList.add("disableElement");
     formAsiento.classList.add("disableElement");
     formResumen.classList.add("disableElement");
     formPagar.classList.add("disableElement");
-    window.location.href = "../index.html";
 }
 
 function confirmarPago() {
@@ -443,23 +551,25 @@ function confirmarPago() {
         confirmButtonText: 'Si',
         confirmButtonColor: '#044D8C',
         denyButtonText: 'No',
-        denyButtonColor: '#7E8ECB',
+        denyButtonColor: '#7E8ECB'
     }).then((result) => {
         if (result.isConfirmed) {
+            envioFormulario()
+            limpiarEntrada()
             Swal.fire('¡Compra realizada con éxito!', '', 'success')
             setTimeout(function() {
-                envioFormulario()
-            }, 3000);
+                window.location.href = "../index.html";
+            }, 4000);
         } else if (result.isDenied) {
-        Swal.fire('La compra fue cancelada', '', 'info')
+            Swal.fire('La compra fue cancelada', '', 'info')
         }
     })
 }
 
 function envioFormulario() {
+    const id =  Math. random();
     const nombre = localStorage.getItem("nombre") + " " + localStorage.getItem("apellido");
     const usuario = localStorage.getItem("email");
-    const contraseña = localStorage.getItem("contraseña");
     const pelicula = localStorage.getItem("pelicula");
     const cine = localStorage.getItem("cineEntrada");
     const formato = localStorage.getItem("formatoEntrada");
@@ -472,36 +582,13 @@ function envioFormulario() {
     const total = localStorage.getItem("totalEntrada");
 
 
-    const ventaEntrada = { nombre, usuario, contraseña, pelicula, cine, formato, fecha, hora, asiento, precio, cantidad, tarjeta, total}
+    const ventaEntrada = { id, nombre, usuario, pelicula, cine, formato, fecha, hora, asiento, precio, cantidad, tarjeta, total}
     
     //Json
     let jsonVenta = JSON.stringify(ventaEntrada);
-    //Guardar en BD
-
+    //Guardar en storage
+    let venta = "venta" + id
+    localStorage.setItem(venta, jsonVenta)
     // alert("Se guardó: " + jsonVenta)
-    limpiarEntrada();
 }
 
-//Días de le semana: desde el día actual + 7
-function cargarDias(dias) {
-    const fechaActual = new Date()
-    const diasAvanzados = dias - fechaActual.getDay()
-    if (diasAvanzados < 0) {
-        diasAvanzados += 7
-    }
-    const fechaFinal = fechaActual.getDate() + diasAvanzados
-    const opciones = []
-    opciones.push(
-        `<option selected value="0">Seleccione el Día...</option> `
-    )
-    for (let i = 0; i < 8; i++) {
-        const fecha = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), fechaActual.getDate() + i)
-        const dia = fecha.getDay()
-        const nombreDia = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
-        const nombreMes = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-        opciones.push(
-            `<option value="${nombreDia[fecha.getDay()]}, ${fecha.getDate()} de ${nombreMes[fecha.getMonth()]} de ${fecha.getFullYear()}">${nombreDia[fecha.getDay()]}, ${fecha.getDate()} de ${nombreMes[fecha.getMonth()]} de ${fecha.getFullYear()}</option>`
-        )
-    }
-    return opciones
-}
