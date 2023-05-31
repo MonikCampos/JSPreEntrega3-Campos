@@ -77,25 +77,25 @@ function validarMovie() {
             localStorage.setItem('pelicula', null);
             //voy a hacer una función que cargue los nombres de las peliculas en el local y los traiga acá
             sectionMovie.innerHTML = `<h3>Selección de película</h3>
-                    <select name="selectPelicula" id="selectPelicula">
-                    <option selected value="0">Seleccione Película...</option>
-                    <option value="La Sirenita">La Sirenita</option>
-                    <option value="Cuando ellas quieren más">Cuando ellas quieren más</option>
-                    <option value="Amor a primer mensaje">Amor a primer mensaje</option>
-                    <option value="Cría Siniestra">Cría Siniestra</option>
-                    <option value="Último recurso">Último recurso</option>
-                    <option value="La Barbarie">La Barbarie</option>
-                    <option value="El triunfo">El triunfo</option>
-                    <option value="La sudestada">La sudestada</option>
-                    <option value="Guardianes de la Galaxia Vol. 3">Guardianes de la Galaxia Vol. 3</option>
-                    <option value="Misántropo">Misántropo</option>
-                    <option value="Vera">Vera</option>
-                    <option value="Rápidos y Furiosos X">Rápidos y Furiosos X</option>
-                    <option value="Sombras de un crimen">Sombras de un crimen</option>
-                    <option value="La extorsión">La extorsión</option>
-                    <option value="John Wick 4">John Wick 4</option>
-                    <option value="Super Mario Bros: la película">Super Mario Bros: la película</option>
-                </select>
+            <select name="selectPelicula" id="selectPelicula">
+                <option selected value="0">Seleccione Película...</option>
+                <option value="La Sirenita">La Sirenita</option>
+                <option value="Cuando ellas quieren más">Cuando ellas quieren más</option>
+                <option value="Amor a primer mensaje">Amor a primer mensaje</option>
+                <option value="Cría Siniestra">Cría Siniestra</option>
+                <option value="Último recurso">Último recurso</option>
+                <option value="La Barbarie">La Barbarie</option>
+                <option value="El triunfo">El triunfo</option>
+                <option value="La sudestada">La sudestada</option>
+                <option value="Guardianes de la Galaxia">Guardianes de la Galaxia</option>
+                <option value="Misántropo">Misántropo</option>
+                <option value="Vera">Vera</option>
+                <option value="Rápidos y Furiosos X">Rápidos y Furiosos X</option>
+                <option value="Sombras de un crimen">Sombras de un crimen</option>
+                <option value="La extorsión">La extorsión</option>
+                <option value="John Wick 4">John Wick 4</option>
+                <option value="Super Mario Bros">Super Mario Bros</option>
+            </select>
             <p></p>
             `;
             selectPelicula = document.getElementById('selectPelicula')
@@ -118,14 +118,14 @@ function validarMovie() {
             <option value="La Barbarie">La Barbarie</option>
             <option value="El triunfo">El triunfo</option>
             <option value="La sudestada">La sudestada</option>
-            <option value="Guardianes de la Galaxia Vol. 3">Guardianes de la Galaxia Vol. 3</option>
+            <option value="Guardianes de la Galaxia">Guardianes de la Galaxia</option>
             <option value="Misántropo">Misántropo</option>
             <option value="Vera">Vera</option>
             <option value="Rápidos y Furiosos X">Rápidos y Furiosos X</option>
             <option value="Sombras de un crimen">Sombras de un crimen</option>
             <option value="La extorsión">La extorsión</option>
             <option value="John Wick 4">John Wick 4</option>
-            <option value="Super Mario Bros: la película">Super Mario Bros: la película</option>
+            <option value="Super Mario Bros">Super Mario Bros</option>
         </select>
     <p></p>
     `;
