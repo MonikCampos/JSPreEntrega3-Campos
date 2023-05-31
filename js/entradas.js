@@ -75,6 +75,7 @@ function validarMovie() {
             //Limpia la selección de la película
             selectCine.classList.add("disableElement");
             localStorage.setItem('pelicula', null);
+            //voy a hacer una función que cargue los nombres de las peliculas en el local y los traiga acá
             sectionMovie.innerHTML = `<h3>Selección de película</h3>
                     <select name="selectPelicula" id="selectPelicula">
                     <option selected value="0">Seleccione Película...</option>
@@ -261,10 +262,7 @@ function onChangeHora() {
             let htmlSiguiente = document.createElement('div')
             htmlSiguiente.innerHTML = `
                 <p>
-                    <a class="btn btn-dark" id="siguienteCine">SIGUIENTE</a>
-                </p>
-                <p>
-                    <a class="btn btn-dark" href="../pages/entradas.html">CANCELAR COMPRA</a>
+                    <a class="btn btn-dark" id="siguienteCine">SIGUIENTE</a> <a class="btn btn-dark" href="../pages/entradas.html">CANCELAR COMPRA</a>
                 </p>
             `
             formPelicula.appendChild(htmlSiguiente)
@@ -343,10 +341,7 @@ function onChangeCantidad() {
         let htmlSiguiente = document.createElement('div')
         htmlSiguiente.innerHTML = `
         <p>
-            <a class="btn btn-dark" id="siguientePrecio">SIGUIENTE</a>
-        </p>
-        <p>
-            <a class="btn btn-dark" href="../pages/entradas.html">CANCELAR COMPRA</a>
+            <a class="btn btn-dark" id="siguientePrecio">SIGUIENTE</a> <a class="btn btn-dark" href="../pages/entradas.html">CANCELAR COMPRA</a>
         </p>
         `
         formPrecio.appendChild(htmlSiguiente)
@@ -430,10 +425,7 @@ function onChangeAsiento() {
         let htmlSiguiente = document.createElement('div')
         htmlSiguiente.innerHTML = `
             <p>    
-                <a class="btn btn-dark" id="siguienteAsiento">SIGUIENTE</a>
-            </p>
-            <p>
-                <a class="btn btn-dark" href="../pages/entradas.html">CANCELAR COMPRA</a>
+                <a class="btn btn-dark" id="siguienteAsiento">SIGUIENTE</a> <a class="btn btn-dark" href="../pages/entradas.html">CANCELAR COMPRA</a>
             </p>
         `
         formAsiento.appendChild(htmlSiguiente)
@@ -481,7 +473,7 @@ function onChangeTarjeta() {
         let htmlSiguiente = document.createElement('div')
         htmlSiguiente.innerHTML = `
             <p>
-                <a class="btn btn-dark" id="siguienteResumen">SIGUIENTE</a>
+                <a class="btn btn-dark" id="siguienteResumen">SIGUIENTE</a> <a class="btn btn-dark" href="../pages/entradas.html">CANCELAR COMPRA</a>
             </p>
         `
         formResumen.appendChild(htmlSiguiente)
@@ -503,9 +495,8 @@ function pagarEntrada() {
         Día: ${localStorage.getItem('diaEntrada')} a las ${localStorage.getItem('horaEntrada')} hrs. Asiento: ${localStorage.getItem('asientoEntrada')}</h4>
         <h4>Promoción: ${localStorage.getItem('precioEntrada')}. Cantidad de entradas: ${localStorage.getItem('cantidadEntrada')}</h4>
         <br>
-        <h4>Total a pagar: $${localStorage.getItem('totalEntrada')}, para pagar con la tarjeta ${localStorage.getItem('tarjetaEntrada')}.</h4>
-        <p><a class="btn btn-dark" id="pagar">PAGAR</a></p>
-        <p><a class="btn btn-dark" href="../pages/entradas.html">CANCELAR COMPRA</a></p>
+        <h3>Total a pagar: $${localStorage.getItem('totalEntrada')}, para pagar con la tarjeta ${localStorage.getItem('tarjetaEntrada')}.</h3>
+        <p><a class="btn btn-dark" id="pagar">PAGAR</a> <a class="btn btn-dark" href="../pages/entradas.html">CANCELAR COMPRA</a></p>
     `
     formPagar.appendChild(htmlPagar)
     validar=true
